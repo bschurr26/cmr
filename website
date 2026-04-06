@@ -1,0 +1,1017 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no"/>
+<title>CMR Atlas 2030 — V9</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800&display=swap" rel="stylesheet"/>
+<style>
+:root{
+--bg:#f5f7fb;--sf:rgba(255,255,255,.86);--sf2:rgba(255,255,255,.97);
+--ink:#0c1425;--ik2:#3b4557;--mu:#7b8494;--ln:rgba(15,23,42,.06);
+--ac:#2563eb;--ac2:#0d9488;--ab:rgba(37,99,235,.055);
+--ok:#059669;--wn:#d97706;--dg:#dc2626;
+--r:18px;--rs:13px;--sh:0 4px 20px rgba(15,23,42,.06);
+--f:'DM Sans',system-ui,-apple-system,sans-serif;--e:cubic-bezier(.22,1,.36,1)
+}
+body.dark{
+--bg:#090e18;--sf:rgba(16,22,38,.82);--sf2:rgba(20,28,48,.95);
+--ink:#e4e9f2;--ik2:#94a3b8;--mu:#64748b;--ln:rgba(255,255,255,.06);
+--ac:#60a5fa;--ac2:#2dd4bf;--ab:rgba(96,165,250,.08);
+--sh:0 4px 20px rgba(0,0,0,.22)
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow:hidden}
+body{margin:0;font-family:var(--f);color:var(--ink);background:var(--bg);transition:background .3s,color .3s;font-size:14px;line-height:1.55}
+::selection{background:var(--ac);color:#fff}
+
+.shell{height:100dvh;display:flex;flex-direction:column}
+.hd{padding:max(env(safe-area-inset-top),8px) 14px 4px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.brand{display:flex;align-items:baseline;gap:6px}
+.brand h1{margin:0;font-size:20px;font-weight:800;letter-spacing:-.03em}
+.brand .ver{font-size:9px;font-weight:700;color:var(--ac);background:var(--ab);padding:2px 7px;border-radius:99px}
+.hdr-r{display:flex;gap:4px}
+.ib{border:none;background:var(--sf);color:var(--ink);width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font-size:14px;cursor:pointer;border:1px solid var(--ln);transition:.15s}
+.ib:active{transform:scale(.92)}
+
+.tabs{display:flex;gap:2px;padding:2px 14px 4px;flex-shrink:0;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{border:none;background:0;color:var(--mu);font:inherit;font-size:11px;font-weight:700;padding:8px 12px;border-radius:11px;cursor:pointer;white-space:nowrap;transition:all .15s var(--e);display:flex;align-items:center;gap:5px}
+.tab.on{background:var(--ac);color:#fff;box-shadow:0 3px 12px rgba(37,99,235,.18)}
+
+.sc{flex:1;overflow-y:auto;overflow-x:hidden;padding:0 12px 32px;scroll-behavior:smooth;-webkit-overflow-scrolling:touch}
+.sc::-webkit-scrollbar{width:3px}.sc::-webkit-scrollbar-thumb{background:var(--ln);border-radius:99px}
+.P{display:none;animation:fadeIn .22s var(--e)}.P.on{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+
+.C{background:var(--sf2);border:1px solid var(--ln);border-radius:var(--r);padding:16px;margin-bottom:12px;box-shadow:var(--sh)}
+.CH{display:flex;align-items:center;gap:9px;margin-bottom:12px}
+.CH h2{margin:0;font-size:16px;font-weight:800;letter-spacing:-.02em;flex:1}
+.CH .ci{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;font-size:15px;background:var(--ab);flex-shrink:0}
+
+h3{font-size:14px;font-weight:700;margin:14px 0 7px;color:var(--ink)}
+h4{font-size:12px;font-weight:700;margin:10px 0 5px;color:var(--ac)}
+label{display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--mu);margin-bottom:4px}
+
+textarea,input[type=number]{
+width:100%;border:1.5px solid var(--ln);background:var(--sf);color:var(--ink);
+border-radius:var(--rs);padding:11px 12px;font:inherit;font-size:14px;outline:none;transition:border .2s
+}
+textarea:focus,input:focus{border-color:var(--ac);box-shadow:0 0 0 3px var(--ab)}
+textarea{min-height:88px;resize:vertical;line-height:1.55}
+
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.g4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:7px}
+@media(max-width:420px){.g3,.g4{grid-template-columns:1fr 1fr}}
+
+.tgls{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+@media(max-width:380px){.tgls{grid-template-columns:1fr}}
+.tg{display:flex;align-items:center;gap:8px;padding:9px 10px;border-radius:var(--rs);border:1.5px solid var(--ln);background:var(--sf);cursor:pointer;transition:all .12s}
+.tg .tl{flex:1;font-size:12px;font-weight:600;line-height:1.25}
+.tg .sw{width:40px;height:22px;border-radius:99px;background:var(--ln);position:relative;flex-shrink:0;transition:.2s}
+.tg .sw::after{content:'';position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.1);transition:transform .2s var(--e)}
+.tg.on{border-color:var(--ac)}.tg.on .sw{background:var(--ac)}.tg.on .sw::after{transform:translateX(18px)}
+
+.btn{border:none;cursor:pointer;font:inherit;font-size:14px;font-weight:700;padding:11px 20px;border-radius:var(--rs);transition:all .12s}
+.btn:active{transform:scale(.96)}
+.bp{background:var(--ac);color:#fff;box-shadow:0 3px 12px rgba(37,99,235,.16)}
+.bg{background:var(--sf);color:var(--ink);border:1.5px solid var(--ln)}
+.brow{display:flex;gap:7px;margin-top:12px}
+
+.badge{display:inline-flex;align-items:center;gap:5px;padding:6px 11px;border-radius:9px;font-size:12px;font-weight:800}
+.bok{background:rgba(5,150,105,.08);color:#047857;border:1px solid rgba(5,150,105,.1)}
+.bwn{background:rgba(217,119,6,.08);color:#b45309;border:1px solid rgba(217,119,6,.1)}
+.bbd{background:rgba(220,38,38,.08);color:#b91c1c;border:1px solid rgba(220,38,38,.1)}
+body.dark .bok{color:#6ee7b7}body.dark .bwn{color:#fbbf24}body.dark .bbd{color:#fca5a5}
+
+.chips{display:flex;flex-wrap:wrap;gap:5px}
+.chip{padding:5px 10px;border-radius:7px;font-size:11px;font-weight:700;background:var(--ab);color:var(--ac)}
+
+.it{padding:11px 12px;border:1px solid var(--ln);border-radius:var(--rs);background:var(--sf);margin-bottom:7px}
+.it strong,.it b{display:block;font-size:13px;margin-bottom:3px}
+.it .su{font-size:12px;color:var(--ik2);line-height:1.55}
+
+.tw{overflow-x:auto;border-radius:var(--rs);border:1px solid var(--ln);margin-top:7px}
+table{width:100%;border-collapse:collapse;min-width:460px;font-size:12px;line-height:1.45}
+th,td{padding:9px 11px;text-align:left;border-bottom:1px solid var(--ln);vertical-align:top}
+th{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.03em;color:var(--mu);background:var(--sf);position:sticky;top:0;z-index:2}
+td:first-child{font-weight:700}
+
+.sb{position:relative;margin-bottom:12px}
+.sb input{width:100%;padding:11px 12px 11px 36px;font-size:14px;border:1.5px solid var(--ln);background:var(--sf);color:var(--ink);border-radius:var(--rs);outline:none}
+.sb input:focus{border-color:var(--ac)}
+.sb .si{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--mu);font-size:15px;pointer-events:none}
+
+.sep{height:1px;background:var(--ln);margin:14px 0}
+.sm{font-size:12px;color:var(--ik2);line-height:1.55}
+.xs{font-size:11px;color:var(--mu);line-height:1.5}
+
+.note{padding:11px 12px;border-radius:var(--rs);background:var(--ab);border:1px solid rgba(37,99,235,.06);font-size:12px;line-height:1.55}
+.warn-box{padding:11px 12px;border-radius:var(--rs);background:rgba(220,38,38,.05);border:1px solid rgba(220,38,38,.1);font-size:12px;line-height:1.55;color:var(--dg)}
+body.dark .warn-box{color:#fca5a5}
+.tip-box{padding:11px 12px;border-radius:var(--rs);background:rgba(5,150,105,.05);border:1px solid rgba(5,150,105,.1);font-size:12px;line-height:1.55;color:#047857}
+body.dark .tip-box{color:#6ee7b7}
+
+.acc{border:1px solid var(--ln);border-radius:var(--rs);margin-bottom:7px;overflow:hidden;background:var(--sf)}
+.ah{padding:11px 12px;display:flex;align-items:center;gap:8px;cursor:pointer;font-weight:700;font-size:13px}
+.ah:active{background:var(--ab)}
+.aa{margin-left:auto;transition:transform .2s;font-size:11px;color:var(--mu)}
+.acc.open .aa{transform:rotate(180deg)}
+.ab2{display:none;padding:0 12px 12px;font-size:12px;line-height:1.55}
+.acc.open .ab2{display:block}
+.at{font-size:9px;font-weight:700;padding:3px 7px;border-radius:5px;background:var(--ab);color:var(--ac)}
+
+.sq{margin:6px 0;padding:9px 11px;border-left:3px solid var(--ac);background:var(--ab);border-radius:0 var(--rs) var(--rs) 0}
+.sq b{font-size:12px;display:block;margin-bottom:3px;color:var(--ac)}
+.sq .sd{font-size:12px;color:var(--ik2);line-height:1.55}
+
+.cr{padding:12px;border-radius:var(--rs);background:linear-gradient(135deg,var(--ab),rgba(13,148,136,.03));border:1px solid rgba(37,99,235,.06);margin-top:7px}
+.cr b{font-size:15px;color:var(--ac)}
+
+.fn{text-align:center;color:var(--mu);font-size:20px;line-height:1}
+.fb{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.fd{padding:11px;border-radius:var(--rs);border:2px solid var(--ac);background:var(--sf2);margin:5px 0;text-align:center;font-weight:700;font-size:12px}
+.fd.ok{border-color:var(--ok);color:var(--ok)}
+.fd.bad{border-color:var(--dg);color:var(--dg)}
+
+.up .us{display:flex;gap:10px;margin-bottom:9px;align-items:flex-start}
+.up .un{width:26px;height:26px;border-radius:50%;background:var(--ac);color:#fff;font-size:11px;font-weight:800;display:grid;place-items:center;flex-shrink:0;margin-top:1px}
+.up .ub{flex:1}
+.up .ub b{font-size:13px;display:block;margin-bottom:3px}
+.up .ub .sd{font-size:12px;color:var(--ik2);line-height:1.55}
+
+.lk{background:none;border:none;color:var(--ac);font:inherit;font-size:12px;font-weight:700;cursor:pointer;padding:3px 0;text-decoration:underline}
+
+.pill-row{display:flex;gap:5px;flex-wrap:wrap;margin:8px 0}
+.pill{padding:5px 10px;border-radius:8px;font-size:11px;font-weight:700;border:1.5px solid var(--ln);background:var(--sf);cursor:pointer;transition:.15s}
+.pill.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+</style>
+</head>
+<body>
+<div class="shell">
+<div class="hd">
+<div class="brand"><h1>CMR Atlas</h1><span class="ver">V9</span></div>
+<div class="hdr-r"><button class="ib" id="thB" title="Thème">◐</button></div>
+</div>
+<div class="tabs">
+<button class="tab on" data-t="analyze">🧠 Analyse</button>
+<button class="tab" data-t="tips">💡 Tips</button>
+<button class="tab" data-t="tables">📊 Tables</button>
+<button class="tab" data-t="stress">💉 Stress</button>
+<button class="tab" data-t="masses">🎯 Masses</button>
+<button class="tab" data-t="calc">🧮 Calculs</button>
+<button class="tab" data-t="atlas">🫀 Atlas</button>
+</div>
+<div class="sc" id="sc">
+
+<!-- ═══ ANALYSE ═══ -->
+<section class="P on" id="s-analyze">
+<div class="C">
+<div class="CH"><div class="ci">📋</div><h2>Contexte clinique</h2></div>
+<textarea id="ctx" placeholder="Ex : ESV fréquentes bilan étiologique · MINOCA troponine J1 · CMH risque arythmique · Cardiotoxicité anthracyclines · Fallot réparée IP résiduelle · IT sévère pré-TEER · Masse OG mobile · Coarctation post-op · Myocardite subaiguë · Péricardite constrictive…"></textarea>
+<div class="g3" style="margin-top:9px">
+<div><label>Poids (kg)</label><input id="wt" type="number" inputmode="decimal" placeholder="80"></div>
+<div><label>DFGe (mL/min)</label><input id="egfr" type="number" inputmode="decimal" placeholder="75"></div>
+<div><label>Hématocrite (%)</label><input id="hct" type="number" inputmode="decimal" placeholder="42"></div>
+</div>
+<div class="sep"></div>
+<h3>Sécurité / contexte</h3>
+<div class="tgls" id="tgls"></div>
+<div class="brow">
+<button class="btn bp" id="aBtn">Analyser</button>
+<button class="btn bg" id="cBtn">Effacer</button>
+</div>
+</div>
+<div class="C"><div class="CH"><div class="ci">📊</div><h2>Résultats</h2></div><div id="resB" class="sm">Entrer un contexte clinique puis appuyer sur Analyser.</div></div>
+</section>
+
+<!-- ═══ TIPS ═══ -->
+<section class="P" id="s-tips">
+<div class="C">
+<div class="CH"><div class="ci">💡</div><h2>Tips pratiques — acquisition</h2></div>
+<div id="tipsB"></div>
+</div>
+</section>
+
+<!-- ═══ TABLES ═══ -->
+<section class="P" id="s-tables">
+<div class="C"><div class="CH"><div class="ci">📊</div><h2>Tables &amp; critères diagnostiques</h2></div><div id="tblB"></div></div>
+</section>
+
+<!-- ═══ STRESS ═══ -->
+<section class="P" id="s-stress">
+<div class="C">
+<div class="CH"><div class="ci">💉</div><h2>Stress pharmacologique</h2></div>
+<div id="stressB"></div>
+</div>
+</section>
+
+<!-- ═══ MASSES ═══ -->
+<section class="P" id="s-masses">
+<div class="C">
+<div class="CH"><div class="ci">🎯</div><h2>Masses cardiaques</h2></div>
+<div class="sm" style="margin-bottom:10px">Thrombus (le + fréquent) → tumeurs bénignes (75% des primitives) → tumeurs malignes primitives → métastases (20–40× plus fréquentes que les primitives).</div>
+<h3>Arbre décisionnel IRM</h3><div id="mF"></div>
+<div class="sep"></div>
+<h3>Tableau comparatif</h3><div id="mT"></div>
+<div class="sep"></div>
+<h3>Fiches détaillées</h3><div id="mC"></div>
+</div>
+</section>
+
+<!-- ═══ CALCULS ═══ -->
+<section class="P" id="s-calc">
+<div class="C">
+<div class="CH"><div class="ci">🧮</div><h2>Calculateurs CMR</h2></div>
+<h3>BSA (Du Bois)</h3>
+<div class="g2"><div><label>Poids (kg)</label><input id="cW" type="number" inputmode="decimal" placeholder="80"></div><div><label>Taille (cm)</label><input id="cH" type="number" inputmode="decimal" placeholder="175"></div></div>
+<div class="cr" id="bsaR"></div>
+<div class="sep"></div>
+<h3>ECV (Extracellular Volume)</h3>
+<div class="g4"><div><label>T1 myo pré</label><input id="e1" type="number" inputmode="decimal" placeholder="1050"></div><div><label>T1 myo post</label><input id="e2" type="number" inputmode="decimal" placeholder="450"></div><div><label>T1 sang pré</label><input id="e3" type="number" inputmode="decimal" placeholder="1600"></div><div><label>T1 sang post</label><input id="e4" type="number" inputmode="decimal" placeholder="350"></div></div>
+<div class="g2" style="margin-top:6px"><div><label>Hématocrite (%)</label><input id="eH" type="number" inputmode="decimal" placeholder="42"></div><div></div></div>
+<div class="cr" id="ecvR"></div>
+<div class="sep"></div>
+<h3>Qp / Qs</h3>
+<div class="g2"><div><label>Débit pulmonaire (mL)</label><input id="qp" type="number" inputmode="decimal"></div><div><label>Débit aortique (mL)</label><input id="qs" type="number" inputmode="decimal"></div></div>
+<div class="cr" id="qpR"></div>
+<div class="sep"></div>
+<h3>Fraction de régurgitation</h3>
+<div class="g2"><div><label>Forward flow (mL)</label><input id="ff" type="number" inputmode="decimal"></div><div><label>Backward flow (mL)</label><input id="bf" type="number" inputmode="decimal"></div></div>
+<div class="cr" id="rfR"></div>
+<div class="sep"></div>
+<h3>Dobutamine — paliers</h3>
+<div class="g2"><div><label>Poids (kg)</label><input id="dW" type="number" inputmode="decimal" placeholder="80"></div><div></div></div>
+<div class="cr" id="dobR"></div>
+<div class="sep"></div>
+<h3>Gadolinium</h3>
+<div class="g2"><div><label>Poids (kg)</label><input id="gW" type="number" inputmode="decimal" placeholder="80"></div><div><label>DFGe</label><input id="gE" type="number" inputmode="decimal" placeholder="75"></div></div>
+<div class="cr" id="gadR"></div>
+</div>
+</section>
+
+<!-- ═══ ATLAS ═══ -->
+<section class="P" id="s-atlas">
+<div class="C">
+<div class="CH"><div class="ci">🫀</div><h2>Atlas diagnostics</h2></div>
+<div class="sb"><span class="si">⌕</span><input id="aS" placeholder="Rechercher une pathologie…"></div>
+<div id="atlB"></div>
+</div>
+</section>
+
+</div>
+</div>
+<script>
+// ═══════════════════════════════════════════════════════
+// CMR ATLAS V9 — ENGINE + DATA
+// ═══════════════════════════════════════════════════════
+const E=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const $=id=>document.getElementById(id);
+const N=s=>(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^\w\s/%.*-]/g,' ').replace(/\s+/g,' ').trim();
+let tgl={stressWanted:0,pregnant:0,ciED:0,asthma:0,avblock:0,claustro:0,renal:0,ras:0};
+
+const TGL=[
+{k:"stressWanted",l:"Stress demandé"},
+{k:"pregnant",l:"Grossesse"},
+{k:"ciED",l:"PM / DAI / implant"},
+{k:"asthma",l:"Asthme / bronchospasme"},
+{k:"avblock",l:"BAV II-III / dysf. sinusale"},
+{k:"claustro",l:"Claustrophobie sévère"},
+{k:"renal",l:"IR avancée (DFGe <30) / dialyse"},
+{k:"ras",l:"RAo serré connu / suspecté"}
+];
+
+// ═══ TIPS CONTENT ═══
+const TIPS_DATA = [
+{title:"PSIR vs Magnitude IR (LGE)",icon:"🔬",content:`<b>Toujours préférer PSIR.</b> La reconstruction PSIR préserve la polarité positive/négative de la magnétisation longitudinale : le scar est TOUJOURS brillant, le myocarde sain TOUJOURS gris foncé, quel que soit le TI choisi. Le contraste est robuste sur une large plage de TI.
+<br><br><b>Magnitude IR</b> = dépendant du TI optimal. Si TI mal choisi → contraste sous-optimal → risque de manquer des petites lésions sous-endocardiques. Utiliser le TI-scout (Look-Locker) pour optimiser.
+<br><br><b>En pratique :</b> PSIR donne TOUJOURS les deux images (PSIR + magnitude) sans surcoût de temps → pas de raison de ne pas l'utiliser.
+<br><br><b>Exception :</b> en free-breathing single-shot, la co-registration PSIR peut être dégradée (erreurs de phase si grande variabilité de position cardiaque) → la magnitude reste interprétable si TI correct.
+<br><br><b>Thrombus :</b> en magnitude IR, monter le TI à ~600 ms (1.5T) / ~875 ms (3T) → thrombus noir (avasculaire) sur fond gris/blanc = aspect binaire très lisible. En PSIR, le thrombus est aussi visible (plus sombre que le myocarde) mais l'aspect est moins binaire → ajuster fenêtrage.
+<br><br><b>Amylose :</b> la difficulté de nulling en magnitude est un SIGNE DIAGNOSTIQUE en soi (le myocarde n'atteint jamais le zéro). En PSIR, ce pattern se traduit par un rehaussement diffus global.`},
+
+{title:"Ordre d'acquisition standard",icon:"📋",content:`<b>Ordre recommandé :</b>
+<br>1. Localizers (3 plans)
+<br>2. <b>Cinés SSFP</b> (repos) — SA base→apex + 2C/3C/4C
+<br>3. <b>T1 mapping NATIF</b> ← OBLIGATOIREMENT AVANT le gadolinium
+<br>4. <b>T2 mapping</b> (peut être avant ou après T1 natif, mais toujours pré-gadolinium)
+<br>5. T2-STIR si besoin (pré-gadolinium)
+<br>6. <b>Injection de gadolinium</b>
+<br>7. Si stress : perfusion stress first-pass → attente ≥10 min → perfusion repos
+<br>8. T1 mapping POST-gadolinium (pour calcul ECV)
+<br>9. <b>LGE PSIR</b> (8–15 min post-injection) — SA + LA
+<br>10. LGE long TI si thrombus suspecté
+<br><br>⚠️ <b>ERREUR CRITIQUE :</b> faire le T1 mapping APRÈS injection → le T1 natif est faussé et INUTILISABLE. Le T1 natif DOIT être acquis AVANT le gadolinium.
+<br><br><b>Protocole stress-first :</b> certains centres font le stress dès le début (injection vasodilatateur → perfusion stress → attente → perfusion repos → cinés → mapping → LGE). Avantage : stress réalisé quand le patient est encore coopérant. Le T1 natif peut être fait entre stress et repos si besoin.`},
+
+{title:"Coaching respiratoire du patient",icon:"🫁",content:`<b>AVANT de mettre le patient dans le tunnel :</b>
+<br>• Expliquer et faire RÉPÉTER les apnées
+<br>• Apnée en <b>EXPIRATION douce</b> (pas en inspiration profonde) → reproductibilité de la position diaphragmatique
+<br>• Commande : "Inspirez... soufflez doucement... et ne bougez plus"
+<br>• Le patient doit inspirer et expirer TOUJOURS la même quantité d'air → position diaphragmatique constante
+<br><br><b>Si patient incapable d'apnée :</b>
+<br>• Passer en free-breathing compressed sensing ou single-shot MOCO pour les cinés
+<br>• Single-shot MOCO pour le LGE
+<br>• Navigator pour le mapping
+<br>• Qualité réduite mais souvent diagnostique
+<br><br><b>Exceptions où on DEMANDE de respirer :</b>
+<br>• <b>Constriction péricardique :</b> ciné real-time en FREE BREATHING pour voir le septal bounce respiratoire (= interdépendance ventriculaire). Demander au patient de respirer normalement pendant l'acquisition.
+<br>• PC real-time free-breathing 10 secondes pour la variation respiratoire du flux mitral/tricuspide (>25%/40% = constriction).`},
+
+{title:"Avant de lancer un stress",icon:"⚠️",content:`<b>Checklist obligatoire :</b>
+<br>• Vérifier l'ABSENCE de RAo serré sur les cinés (ouvrir la valve aortique en ciné 3C/LVOT). RAo serré = CI RELATIVE à tous les agents.
+<br>• Vérifier l'absence de CMH obstructive (SAM en ciné LVOT) → CI dobutamine
+<br>• Deux VVP (une pour vasodilatateur, une pour gadolinium) si adénosine
+<br>• Stop caféine 12–24h (café, thé, chocolat, Red Bull, Coca)
+<br>• Stop dipyridamole oral 48h si adénosine/regadenoson
+<br>• Stop bêtabloquants 24h si dobutamine prévu
+<br>• Stop nitrates 24h si dobutamine
+<br>• Chariot d'urgence accessible, aminophylline préparée
+<br>• Monitoring ECG + PA + SpO2 continu
+<br><br><b>CI absolues vasodilatateurs :</b> asthme/bronchospasme actif, BAV II-III sans PM, bradycardie sinusale <45 bpm
+<br><b>CI relatives :</b> RAo serré (AVA <1 cm² ou gradient >50 mmHg), hypotension <90 mmHg, IC décompensée, sténose carotidienne sévère
+<br><b>CI dobutamine :</b> HTA sévère ≥220/120, RAo serré, CMH obstructive, arythmie non contrôlée, FA rapide
+<br><br>🚨 Si asthme + BAV → TOUS les vasodilatateurs CI → dobutamine = seule option (mais vérifier aussi ses CI propres)`},
+
+{title:"Dark rim artifact vs ischémie",icon:"🔍",content:`Le <b>dark rim artifact</b> est un artefact de susceptibilité/Gibbs en sous-endocardique qui mime un défaut de perfusion. Comment le différencier d'une vraie ischémie :
+<br><br>• <b>Transitoire</b> : dure <4 battements (suit le front du bolus puis disparaît). L'ischémie vraie persiste >5 battements.
+<br>• Suit le contour endocardique de façon <b>concentrique et uniforme</b>. L'ischémie vraie est <b>segmentaire et territorialisée</b>.
+<br>• <b>Pas de correspondance en ciné</b> (pas de trouble cinétique). L'ischémie significative s'accompagne souvent d'une anomalie de cinétique induite.
+<br>• Plus marqué en interface sang-myocarde → surtout base et mid.
+<br>• Plus fréquent à 3T qu'à 1.5T.`},
+
+{title:"Erreurs fréquentes à éviter",icon:"🚫",content:`<b>Acquisition :</b>
+<br>• T1 natif APRÈS gadolinium → inutilisable (erreur la plus grave)
+<br>• Épaisseur pariétale mesurée en SYSTOLE au lieu de TÉLÉDIASTOLE → surestimation
+<br>• Stack SA ne couvrant pas la base du VD → sous-estimation du VTDVD (erreur fréquente de segmentation)
+<br>• Oublier de vérifier la valve aortique en ciné avant stress
+<br><br><b>Interprétation :</b>
+<br>• LGE aux points d'insertion VD chez le sportif = NORMAL (ne pas diagnostiquer une pathologie)
+<br>• Dark rim artifact confondu avec ischémie sous-endocardique (voir tip dédié)
+<br>• Seuils IM primaire appliqués à une IM fonctionnelle (seuils plus bas en fonctionnel)
+<br>• Qp/Qs faussé par Valsalva en apnée dans les shunts → préférer free-breathing pour le PC
+<br>• NC/C >2.3 = LVNC diagnostiquée chez un sportif ou une femme enceinte → hypertrabéculation physiologique, pas LVNC
+<br>• Oublier de chercher un thrombus apical dans un IDM antérieur étendu avec FEVG basse
+<br>• Myocardite diagnostiquée uniquement sur T2 sans confirmer par un critère T1 (Lake Louise exige les deux)`},
+
+{title:"Wideband LGE pour CIED",icon:"🔋",content:`Chez les patients avec PM/DAI, les artefacts de bande hyperintense du LGE standard rendent souvent les images non diagnostiques (off-resonance du générateur, bande 2–6 kHz).
+<br><br>Le <b>wideband RF LGE</b> utilise un pulse d'inversion à bande spectrale large qui compense le décalage de fréquence → réduit drastiquement l'artefact.
+<br><br>Disponible sur la plupart des constructeurs. À activer systématiquement si CIED présent.`},
+
+{title:"Séquences avancées (optionnelles)",icon:"🔬",content:`<b>Dark-blood LGE</b> (blood-nulled PSIR) : améliore la détection des petites lésions sous-endocardiques en annulant le signal du sang (meilleur contraste scar/sang). Validé histologiquement. Utile surtout pour les IDM sous-endocardiques fins et la quantification de scar.
+<br><br><b>4D flow</b> : acquisition volumétrique du flux dans les 3 directions. Utile pour les valvulopathies complexes, les shunts, l'évaluation hémodynamique globale. Temps d'acquisition long mais couverture complète.
+<br><br><b>Feature tracking (strain)</b> : GLS/GCS calculé post-hoc sur les cinés SSFP standard. Plus sensible que la FEVG pour la toxicité précoce (cardio-onco) et la CMD infraclinique. Pas de séquence supplémentaire nécessaire.`}
+];
+
+// ═══ DIAGNOSES — 24 INDICATIONS ═══
+const DX={
+HCM:{tg:["hvg"],n:"CMH sarcomérique",w:"HVG asymétrique/apicale, fibrose, obstruction LVOT, évaluation du risque arythmique (HCM Risk-SCD).",
+pr:[
+{s:"Cinés SSFP — stack SA base→apex + 2C/3C/4C",d:"Mesurer épaisseur MAXIMALE en télédiastole, segment par segment base→apex (pas seulement septal). Rechercher : HVG asymétrique septale (80%), apicale (Yamaguchi = aspect 'as de pique' en 4C), ou concentrique. SAM de la valve mitrale, contact mitro-septal. Cryptes myocardiques (phénotype pré-hypertrophique chez apparentés). Anévrisme apical (2–5%, souvent sous-diagnostiqué en écho)."},
+{s:"Ciné LVOT dédié (3C + perpendiculaire LVOT)",d:"Visualiser et quantifier l'obstruction dynamique : SAM, jet d'accélération sous-aortique. IM postérieure associée (jet excentrique postérieur). Mesurer épaisseur septale sous-aortique pour discussion myectomie/alcoolisation."},
+{s:"T1 mapping natif — SA mid ± base/apex",d:"T1 augmenté dans les segments hypertrophiés = fibrose interstitielle. MAIS si T1 natif BAS → évoquer Fabry (diagnostic différentiel majeur). Toujours comparer à la normale du site/séquence."},
+{s:"T2 mapping — SA mid",d:"Rechercher œdème focal = phase inflammatoire active. Augmenté en post-myectomie/alcoolisation septale récente. Normal dans CMH stable."},
+{s:"LGE PSIR — SA complet + 2C/3C/4C (8–15 min post-GBCA)",d:"Pattern caractéristique : fibrose PATCHY dans les segments hypertrophiés + points d'insertion VD. Quantifier le % de masse VG en LGE : ≥15% = haut risque arythmique (modificateur ESC 2023, classe IIb pour DAI). Rechercher spécifiquement un anévrisme apical (souvent entouré de LGE transmural)."},
+{s:"ECV (T1 pré + post + Ht)",d:"ECV augmenté = fibrose diffuse interstitielle. Complète le LGE (qui ne voit que la fibrose focale de remplacement). Pronostic indépendant."}
+],
+pt:["HVG asymétrique septale 80%, apicale 15% (Yamaguchi), concentrique 5%.","LGE ≥15% masse VG = haut risque arythmique indépendant du HCM Risk-SCD.","Anévrisme apical 2–5% = risque arythmique fort, souvent manqué en écho.","Burned-out phase = dilatation VG + baisse FEVG <50% = TRÈS haut risque arythmique et mortalité.","FEVG habituellement préservée voire hyperdynamique. OG dilatée fréquente (reflet de la dysfonction diastolique).","HCM Risk-SCD : 7 variables (âge, épaisseur max, diamètre OG, gradient max, TVNS, réponse TA anormale effort, ATCD familiaux). Seuils : ≥6% → DAI (IIa), 4–6% → zone grise (IIb), <4% → pas de DAI."],
+traps:["Ne pas mesurer l'épaisseur en systole (surestimation).","Les points d'insertion VD en LGE sont quasi-physiologiques chez le sportif d'endurance → ne pas surdiagnostiquer.","La CMH apicale est souvent sous-diagnostiquée en écho (fenêtre apicale médiocre) → l'IRM est l'examen de référence.","Un T1 natif BAS dans une HVG oriente vers Fabry, pas CMH."]},
+
+Amyloid:{tg:["hvg","amyloid"],n:"Amylose cardiaque",w:"HVG inexpliquée, discordance voltage-masse ECG, phénotype restrictif, ICFEp avec épaississement pariétal.",
+pr:[
+{s:"Cinés SSFP complet",d:"Hypertrophie concentrique biVentriculaire. OG et OD dilatées (phénotype restrictif). Épanchement péricardique souvent présent. Épaississement valvulaire AV (mitrale et tricuspide). Aspect 'granuleux' ou 'sparkling' du myocarde (inconstant)."},
+{s:"T1 mapping natif — SA mid + base",d:"T1 natif ÉLEVÉ (>1100 ms à 1.5T MOLLI). Très discriminant pour l'amylose. Valeurs parmi les plus hautes de toutes les cardiomyopathies. ATTENTION : les normes dépendent du champ (1.5T vs 3T) et de la séquence."},
+{s:"ECV (T1 pré + post + Ht)",d:"ECV TRÈS ÉLEVÉ, souvent >40% (repère pratique, pas seuil universel). Corrélé à la charge amyloïde. ECV est le paramètre CMR le plus puissant pour le diagnostic et le pronostic. Certaines équipes utilisent ECV >30% comme seuil de dépistage."},
+{s:"LGE PSIR — OBLIGATOIRE",d:"SIGNE QUASI-PATHOGNOMONIQUE : difficulté de nulling du myocarde en magnitude IR (le myocarde ne passe jamais par le zéro car tout le myocarde est infiltré). En PSIR, rehaussement SOUS-ENDOCARDIQUE DIFFUS ou TRANSMURAL global. Peut être biVentriculaire. Toujours utiliser PSIR car le nulling en magnitude est impossible → PSIR contourne le problème."},
+{s:"T2 mapping — SA mid",d:"Peut être augmenté (œdème myocardique amyloïde). Moins discriminant que T1/ECV."}
+],
+pt:["Difficulté de nulling en magnitude = quasi-pathognomonique. TOUJOURS utiliser PSIR.","T1 natif très élevé + ECV très élevé (>40%) = combinaison très évocatrice.","Épaississement valvulaire AV + hypertrophie concentrique + dilatation bi-atriale = triade classique.","Corrélation obligatoire : scintigraphie osseuse (grade Perugini ≥2 sans gammapathie = ATTR) + immunofixation + chaînes légères libres (AL).","Dépistage actif dans : HVG inexpliquée du sujet âgé, ICFEp avec épaississement, canal carpien bilatéral, RAo paradoxal bas débit bas gradient."],
+traps:["Ne pas essayer de nuller le myocarde en magnitude quand c'est impossible → passer en PSIR.","Un ECV 'légèrement' augmenté (30–40%) peut être vu dans d'autres pathologies → toujours croiser avec T1 natif et LGE.","L'amylose AL et ATTR ont le même aspect en IRM → le typage repose sur le bilan hématologique + scintigraphie, pas sur l'IRM."]},
+
+Fabry:{tg:["hvg","fabry"],n:"Maladie de Fabry",w:"HVG avec T1 natif BAS (quasi-pathognomonique avant fibrose), homme jeune, atteinte rénale/neuropathique/cutanée.",
+pr:[
+{s:"Cinés SSFP",d:"HVG concentrique ou segmentaire, parfois modérée. FEVG habituellement préservée."},
+{s:"T1 mapping natif — SA mid + base + apex",d:"T1 natif ABAISSÉ (<950 ms à 1.5T MOLLI) = accumulation intracellulaire de sphingolipides (Gb3). C'est la CLÉ DIAGNOSTIQUE. ATTENTION : le T1 peut pseudo-normaliser si fibrose extensive surajoutée (stade avancé) car fibrose + sphingolipides = effets opposés sur T1."},
+{s:"T2 mapping — SA mid + base",d:"T2 augmenté en zone inflammatoire active (souvent co-localisé avec le futur LGE inféro-latéral basal). Un T2 élevé = FENÊTRE THÉRAPEUTIQUE (traitement enzymatique substitutif avant fibrose irréversible)."},
+{s:"LGE PSIR",d:"LGE INFÉRO-LATÉRAL BASAL MÉSOCARDIQUE en phase évoluée = fibrose de remplacement (stade tardif, irréversible). Ce pattern est relativement spécifique mais non pathognomonique."},
+{s:"ECV",d:"ECV normal ou BAS en début de maladie (sphingolipides intracellulaires ≠ expansion extracellulaire). ECV augmenté dans les zones de fibrose (stade avancé)."}
+],
+pt:["T1 natif BAS = clé diagnostique avant fibrose. Presque pathognomonique dans un contexte d'HVG.","LGE inféro-latéral basal mésocardique (stade avancé) = fibrose irréversible.","T2 augmenté en zone inflammatoire = fenêtre thérapeutique → démarrer traitement enzymatique.","Corrélation : alpha-galactosidase A (basse chez l'homme), lyso-Gb3 (élevé), confirmation génétique (GLA)."],
+traps:["Le T1 peut pseudo-normaliser si fibrose surajoutée → ne pas exclure Fabry si T1 'normal' avec LGE inféro-latéral.","Chez la femme (hétérozygote), l'expression phénotypique est variable → le T1 peut être moins abaissé."]},
+
+Myocarditis:{tg:["chest_injury"],n:"Myocardite aiguë / subaiguë",w:"Douleur thoracique + troponine + coronaires non obstructives, contexte viral/inflammatoire.",
+pr:[
+{s:"Cinés SSFP complet",d:"Rechercher trouble cinétique FOCAL (pas global comme dans Tako-Tsubo). Épanchement péricardique (myopéricardite). FEVG variable (préservée à sévèrement altérée)."},
+{s:"T2 mapping — SA mid + base + apex",d:"Œdème focal ou diffus = critère T2 de Lake Louise 2018. Quantitatif : T2 augmenté par rapport aux normes du site. Plus fiable que le T2-STIR car quantitatif et moins sensible aux artefacts."},
+{s:"T2-STIR — SA + LA",d:"Hypersignal SOUS-ÉPICARDIQUE ou MÉSOCARDIQUE. Complémentaire du T2 mapping. ATTENTION aux artefacts de mouvement qui miment un hypersignal sous-épicardique → toujours croiser avec le T2 mapping quantitatif."},
+{s:"T1 mapping natif — SA mid + base",d:"T1 augmenté = critère T1 de Lake Louise 2018. Peut être diffus ou focal."},
+{s:"ECV",d:"Augmenté en zone inflammatoire. Aide au diagnostic si T1 natif borderline."},
+{s:"LGE PSIR — SA + LA complet",d:"Pattern NON ISCHÉMIQUE = SOUS-ÉPICARDIQUE ou MÉSOCARDIQUE, souvent INFÉRO-LATÉRAL. C'est LA clé : le LGE ischémique PART TOUJOURS du sous-endocarde. La myocardite RESPECTE le sous-endocarde. Peut être multifocal."},
+{s:"Évaluation péricardique (T2 + LGE)",d:"Si myopéricardite : LGE péricardique + T2 péricardique augmenté."}
+],
+pt:["Lake Louise 2018 : ≥1 critère T2 (œdème) + ≥1 critère T1 (T1 natif↑ OU ECV↑ OU LGE non ischémique) = myocardite active.","LGE sous-épicardique/mésocardique inféro-latéral = pattern classique. RESPECTE le sous-endocarde (≠ ischémique).","TIMING OPTIMAL : IRM dans les 2 semaines post-épisode. L'œdème (T2) disparaît en premier (2–4 sem). Le LGE persiste plus longtemps (mois/années).","LGE résiduel au suivi = cicatrice = substrat arythmogène potentiel → surveillance rythmique.","La myocardite est la 1re cause de MINOCA identifiée par CMR (~60%)."],
+traps:["Ne pas diagnostiquer une myocardite sur T2 seul sans critère T1 (Lake Louise exige les deux).","Les artefacts de mouvement en T2-STIR peuvent mimer un hypersignal sous-épicardique → vérifier sur T2 mapping.","Un LGE SOUS-ENDOCARDIQUE en territoire coronaire n'est PAS une myocardite → c'est un infarctus (même si les coronaires sont normales → micro-IDM, spasme, embolie)."]},
+
+Infarct:{tg:["chest_injury"],n:"Infarctus / viabilité / cardiopathie ischémique",w:"SCA, viabilité pré-revascularisation, bilan d'une cardiopathie ischémique chronique.",
+pr:[
+{s:"Cinés SSFP complet",d:"Troubles cinétiques SEGMENTAIRES dans un TERRITOIRE CORONAIRE (IVA → antérieur/septal/apical; Cx → latéral/postérieur; CD → inférieur/VD). Amincissement pariétal si chronique (<5.5 mm = non viable). Anévrisme VG (dyskinésie). Rechercher thrombus apical (masse immobile adhérente à paroi akinétique)."},
+{s:"T2 mapping / T2-STIR",d:"Œdème = composante AIGUË ou SUBAIGUË. Délimite l'area at risk (territoire à risque). Si T2 normal = infarctus chronique (pas d'œdème résiduel)."},
+{s:"LGE PSIR — SA complet + LA (8–15 min post-GBCA)",d:"SOUS-ENDOCARDIQUE → TRANSMURAL en territoire coronaire = PATHOGNOMONIQUE d'une origine ischémique. L'infarctus PART TOUJOURS DU SOUS-ENDOCARDE (wave front d'Reimer). TRANSMURALITÉ = clé de la viabilité : <50% = viable (récupération attendue post-revasc) ; >50% = non viable. Reporter segment par segment (AHA 17 segments)."},
+{s:"LGE précoce (EGE, 1–3 min post-injection)",d:"Rechercher MVO (microvascular obstruction) = zone NOIRE CENTRALE dans la zone d'infarctus. MVO = marqueur de mauvais pronostic (remodelage VG, insuffisance cardiaque)."},
+{s:"LGE long TI (~600 ms à 1.5T)",d:"Détection de THROMBUS VG apical. Le thrombus est NOIR (avasculaire) sur un fond gris/blanc. Fréquent dans l'IDM antérieur étendu avec FEVG basse. TOUJOURS le chercher dans ce contexte."},
+{s:"Perfusion de stress (si ischémie résiduelle suspectée)",d:"Défaut de perfusion INDUIT dans un AUTRE territoire que la nécrose = ischémie résiduelle → indication de revascularisation."},
+{s:"Dobutamine faible dose (5–10–15 µg/kg/min) si question de viabilité",d:"Réserve contractile = amélioration de la cinétique sous dobutamine dans un segment akinétique avec LGE <50% = viable."}
+],
+pt:["LGE sous-endocardique/transmural en territoire coronaire = pathognomonique ischémique.","Transmuralité : 0% = récup très probable ; 1–25% = très probable ; 26–50% = possible (~50%) ; 51–75% = peu probable ; >75% = irréversible.","MVO (zone noire dans le LGE) = facteur indépendant de mauvais pronostic.","Thrombus : chercher systématiquement en LGE long TI dans tout IDM antérieur avec FEVG <40%.","Épaisseur télédiastolique <5.5 mm = amincissement cicatriciel = non viable."],
+traps:["Ne pas confondre un micro-IDM sous-endocardique (MINOCA) avec une myocardite — le pattern sous-endocardique EST ischémique.","Toujours vérifier la CORRESPONDANCE TERRITORIALE coronaire du LGE.","Oublier de chercher un thrombus = risque embolique manqué."]},
+
+MINOCA:{tg:["chest_injury"],n:"MINOCA",w:"Troponine élevée + coronaires non obstructives (<50%). CMR = examen CLÉ pour identifier l'étiologie.",
+pr:[
+{s:"Cinés SSFP complet",d:"Trouble cinétique focal (myocardite, micro-IDM) vs global/apical (Tako-Tsubo) vs normal."},
+{s:"T2 mapping — SA + LA",d:"Œdème FOCAL = myocardite ou micro-IDM. Œdème DIFFUS APICAL = Tako-Tsubo. ABSENT = chronique ou CMR normale."},
+{s:"T1 mapping natif + ECV",d:"T1 augmenté en zone pathologique. ECV discrimine."},
+{s:"LGE PSIR — SA + LA complet",d:"SOUS-ÉPICARDIQUE/MÉSOCARDIQUE = MYOCARDITE (~60% des MINOCA). SOUS-ENDOCARDIQUE en territoire coronaire = MICRO-IDM / embolie / spasme (~15%). ABSENT + œdème apical = TAKO-TSUBO (~15%). ABSENT + rien = CMR NORMALE (~15–20%)."}
+],
+pt:["La CMR identifie la cause dans ~75–80% des MINOCA. C'est l'examen de 1re intention après la coronarographie.","Étiologies par fréquence : myocardite 60% > micro-IDM 15% > Tako-Tsubo 15% > CMR normale 15%.","TIMING OPTIMAL : dans les 2 SEMAINES post-épisode (sensibilité maximale pour l'œdème T2).","Si CMR normale → évoquer spasme coronaire (test acétylcholine), maladie microvasculaire (INOCA), myocardite guérie."],
+traps:["Ne pas faire l'IRM trop tard (>4 semaines) → l'œdème a disparu, la sensibilité chute.","Un LGE sous-endocardique même avec coronaires normales = origine ischémique (spasme, embolie, dissection spontanée)."]},
+
+INOCA:{tg:["chest_injury"],n:"INOCA / maladie microvasculaire",w:"Angor typique + ischémie documentée + coronaires non obstructives. Évaluation de la dysfonction microvasculaire.",
+pr:[
+{s:"Cinés SSFP complet",d:"Fonction VG souvent préservée. Parfois troubles cinétiques subtils."},
+{s:"Perfusion de stress — 3 coupes SA (base/mid/apex)",d:"Rechercher un défaut de perfusion SOUS-ENDOCARDIQUE CONCENTRIQUE NON TERRITORIALISÉ = atteinte microvasculaire (≠ défaut segmentaire de la maladie épicardique). Le défaut est souvent diffus, touchant les 3 coupes de façon homogène."},
+{s:"Perfusion de repos",d:"Comparer au stress : défaut STRESS-ONLY = ischémie microvasculaire inductible."},
+{s:"T1 mapping natif + ECV",d:"T1/ECV augmentés = fibrose interstitielle diffuse (conséquence chronique de la dysfonction microvasculaire)."},
+{s:"LGE PSIR",d:"Souvent ABSENT. Si présent : micro-IDM punctiformes sous-endocardiques."}
+],
+pt:["Défaut de perfusion sous-endocardique CONCENTRIQUE (non territorialisé) au stress = maladie microvasculaire.","MPRI (Myocardial Perfusion Reserve Index) global abaissé (<1.5–2.0) si quantification disponible.","Compléter par test de vasoréactivité invasif (acétylcholine) si spasme épicardique suspecté.","LGE souvent absent → le diagnostic repose sur la perfusion."],
+traps:["Ne pas confondre dark rim artifact avec un défaut concentrique — le DRA est transitoire <4 battements."]},
+
+Takotsubo:{tg:["chest_injury"],n:"Tako-Tsubo",w:"Ballonisation apicale/médiane transitoire, post-stress, coronaires normales.",
+pr:[
+{s:"Cinés SSFP — 2C/3C/4C + SA",d:"Ballonisation APICALE classique (pointe ballonnée, base hyperkinétique). Variantes : médiane, basale inversée, focale. FEVG souvent 30–45% en phase aiguë."},
+{s:"T2 mapping / T2-STIR",d:"Œdème DIFFUS dans les segments ballonisés = inflammation/sidération. Critère positif Lake Louise."},
+{s:"T1 mapping natif",d:"T1 augmenté dans les segments atteints (transitoire)."},
+{s:"LGE PSIR",d:"ABSENCE de LGE = argument MAJEUR pour Tako-Tsubo. C'est ce qui le différencie de l'infarctus (LGE+) et de la myocardite (LGE+). Si LGE présent → remettre en question le diagnostic."}
+],
+pt:["Triade diagnostique : ballonisation + œdème T2 + ABSENCE de LGE.","La FEVG récupère en 2–8 semaines dans la grande majorité des cas.","Variantes : apicale (80%), médiane (15%), basale inversée (rare), focale (rare).","ECV peut être transitoirement augmenté (œdème interstitiel) et se normalise au suivi."],
+traps:["Si LGE présent → envisager myocardite ou infarctus plutôt que Tako-Tsubo."]},
+
+DCM:{tg:["dcm"],n:"CMD / insuffisance cardiaque à FEVG réduite",w:"Dilatation VG, baisse FEVG, étiologie différentielle (ischémique vs non ischémique), pronostic.",
+pr:[
+{s:"Cinés SSFP complet",d:"Mesurer volumes VG/VD indexés (BSA), FEVG, FEVD. Cinétique segmentaire : globalement hypokinétique (CMD) vs segmentaire territorial (ischémique). Quantifier IM fonctionnelle associée (tenting, coaptation)."},
+{s:"T1 mapping natif + ECV",d:"T1/ECV augmentés = fibrose diffuse interstitielle. Pronostic indépendant dans la CMD. ECV > T1 natif pour prédire les événements."},
+{s:"LGE PSIR — SA + LA",d:"MID-WALL SEPTAL = CMD non ischémique idiopathique (présent dans ~35% des CMD). SOUS-ENDOCARDIQUE territorial = ischémique. Le LGE mid-wall septal est un facteur pronostique arythmique INDÉPENDANT de la FEVG → discussion DAI même si FEVG >35%."},
+{s:"T2 mapping",d:"Œdème si composante inflammatoire active (myocardite chronique active, sarcoïdose, cardiotoxicité)."},
+{s:"PC aortique (si IM significative)",d:"Débit aortique antérograde pour quantification volumétrique de l'IM (RV IM = SVVG − débit Ao)."}
+],
+pt:["LGE mid-wall septal = CMD non ischémique. Risque arythmique indépendant.","LGE mid-wall → discuter DAI même si FEVG >35% (ESC 2022 : à considérer).","Absence totale de LGE dans une CMD = meilleur pronostic (plus grande chance de récupération).","LGE sous-endocardique territorial = étiologie ischémique confirmée (même sans coronarographie)."],
+traps:["Ne pas conclure 'CMD idiopathique' si LGE sous-endocardique → c'est ischémique.","Toujours chercher une étiologie traitable : myocardite, sarcoïdose, hémochromatose, tachycardie-induite."]},
+
+RhythmicCMP:{tg:["arrhythmia","dcm"],n:"Cardiomyopathie rythmique (tachycardie-induite)",w:"Dysfonction VG dans un contexte de tachycardie chronique (FA rapide, ESV >15%, TV incessante). Diagnostic souvent rétrospectif après contrôle du rythme.",
+pr:[
+{s:"Cinés SSFP complet",d:"Dilatation VG, baisse FEVG GLOBALE (pas de pattern segmentaire). Hypokinésie diffuse sans prédominance territoriale."},
+{s:"T1 mapping natif + ECV",d:"T1/ECV NORMAUX ou sub-normaux = argument FORT de réversibilité. C'est le critère discriminant vs CMD vraie (où ECV est augmenté)."},
+{s:"LGE PSIR",d:"ABSENT ou très minime = bon pronostic de récupération complète. Si LGE MID-WALL significatif → probable CMD vraie avec arythmie secondaire (pas une cardiomyopathie rythmique pure)."},
+{s:"T2 mapping",d:"Normal (pas d'inflammation active)."}
+],
+pt:["T1/ECV normaux + absence de LGE = fort argument pour réversibilité.","Si LGE mid-wall → CMD vraie avec arythmie surajoutée (pronostic moins bon).","Contrôle IRM à 3–6 mois post-contrôle du rythme pour documenter la récupération de la FEVG et des volumes.","La récupération peut être complète si la cause (tachycardie) est traitée à temps."],
+traps:["Ne pas diagnostiquer une CMD idiopathique avant d'avoir exclu la composante rythmique → contrôler le rythme d'abord, re-scanner après."]},
+
+VT_SCD:{tg:["arrhythmia"],n:"TV / ESV fréquentes / mort subite / syncope",w:"Bilan étiologique d'une arythmie ventriculaire : ESV fréquentes (>10–15%), TV soutenue/non soutenue, mort subite récupérée, syncope suspecte d'arythmie.",
+pr:[
+{s:"Cinés SSFP — stack SA complet + 2C/3C/4C",d:"Bilan morphologique et fonctionnel biVentriculaire. Rechercher systématiquement : CMH? CMD? ACM? Anévrisme VG? Akinésie segmentaire (ischémique)? Non-compaction?"},
+{s:"Ciné RVOT dédié (sagittal oblique + axial)",d:"Rechercher dilatation RVOT, dyskinésie focale subtricuspidienne ou apicale VD (critères ACM). Triangle de dysplasie."},
+{s:"T1 mapping natif — SA mid + base",d:"T1 BAS = Fabry. T1 ÉLEVÉ = amylose, myocardite, fibrose. Oriente le diagnostic étiologique."},
+{s:"T2 mapping — SA mid",d:"Œdème = inflammation active (myocardite aiguë, sarcoïdose active). Si T2 normal = pathologie chronique/cicatricielle."},
+{s:"LGE PSIR — couverture EXHAUSTIVE base→apex SA + LA",d:"LE PATTERN LGE = LA CLÉ ÉTIOLOGIQUE. Sous-endocardique territorial = ischémique. Mid-wall septal = CMD. Sous-épicardique/mésocardique = myocardite. Patchy multifocal = sarcoïdose. Patchy segments hypertrophiés = CMH. Sous-épicardique inféro-latéral basal = Fabry avancé ou ACM left-dominant."},
+{s:"LGE VD (coupes axiales dédiées si ACM suspectée)",d:"Rehaussement paroi libre VD, zone subtricuspidienne. Difficile à voir mais crucial pour ACM."}
+],
+pt:["Le LGE EST le substrat arythmogène → corrélation avec la cartographie électroanatomique en salle d'EP.","ESV infundibulaires idiopathiques + CMR NORMALE = idiopathique (bon pronostic, ablation si symptomatique).","ESV/TV + LGE = substrat organique → risque de TV soutenue → discuter DAI.","Mort subite récupérée + CMR NORMALE = canalopathie probable → bilan génétique (QT long, Brugada, TV catécholaminergique).","Bilan systématique : CMH, ACM, CMD, sarcoïdose, myocardite ancienne, ischémique, LVNC, Fabry."],
+traps:["Ne pas conclure 'cœur normal' sans avoir fait un LGE exhaustif base→apex.","Les ESV du VD ne sont PAS toujours une ACM — la majorité sont idiopathiques si la CMR est normale."]},
+
+ACM:{tg:["rv","arrhythmia"],n:"ACM / DAVD (cardiomyopathie arythmogène)",w:"VD dilaté, TV retard gauche, ESV axe inférieur, ATCD familiaux de mort subite.",
+pr:[
+{s:"Cinés SSFP — stack SA complet + coupes AXIALES transverses",d:"Mesurer volumes VD indexés (RVEDVi, RVESVi) et FEVD. Rechercher anomalies cinétiques RÉGIONALES VD : akinésie, dyskinésie, micro-anévrismes. Triangle de dysplasie : RVOT, infundibulum subtricuspidien, apex VD."},
+{s:"Ciné RVOT dédié (sagittal oblique + axial)",d:"Dilatation RVOT. Dyskinésie focale. Critères TFC 2010 : akinésie/dyskinésie/anévrisme VD régional + RVEDVi↑ ou FEVD↓ = critère majeur."},
+{s:"Cinés VG attentifs (4C, 2C, SA)",d:"Rechercher phénotype LEFT-DOMINANT : atteinte VG prédominante avec LGE sous-épicardique inféro-latéral, PARFOIS sans anomalie VD visible."},
+{s:"LGE PSIR — VG ET VD",d:"VD : paroi libre, subtricuspidien (difficile à voir, coupes fines axiales). VG : sous-épicardique/mésocardique inféro-latéral si phénotype gauche. LGE = substrat arythmogène."},
+{s:"T1 mapping (si phénotype gauche dominant)",d:"T1/ECV augmentés dans les zones atteintes VG."}
+],
+pt:["Critères TFC 2010 révisés : anomalies cinétiques VD régionales (akinésie/dyskinésie/anévrisme) + dilatation (RVEDVi ≥110 H / ≥100 F) ou baisse FEVD (<40% majeur, 40–45% mineur).","Triangle de dysplasie : RVOT, subtricuspidien, apex VD.","Phénotype left-dominant : LGE sous-épicardique inféro-latéral VG sans anomalie VD → penser ACM même si VD normal.","LGE = substrat arythmogène → corrélation cartographie pré-ablation."],
+traps:["ATTENTION faux positifs chez le sportif d'endurance : VD dilaté + FEVD préservée + pas de dyskinésie FOCALE = adaptation physiologique ≠ ACM.","La graisse VD en fat-sat est PEU SPÉCIFIQUE (présente chez l'obèse, le sujet âgé) → n'est plus un critère diagnostique fiable.","Ne pas confondre le VD d'entraînement (dilatation harmonieuse, FEVD normale, pas de LGE) avec une ACM."]},
+
+ASD:{tg:["rv","shunt"],n:"CIA / shunt interatrial / PAPVR",w:"Surcharge droite, VD dilaté, souffle, embolie paradoxale.",
+pr:[
+{s:"Cinés SSFP — SA + 4C",d:"Dilatation OD et VD. Paradoxe septal (flattening diastolique). IP/IT fonctionnelles."},
+{s:"Ciné septum interauriculaire dédié (plans sagittal oblique)",d:"Visualiser directement le defect : localisation (ostium secundum 70%, primum, sinus venosus 15–20%, coronary sinus), taille, berges."},
+{s:"PC aorte ascendante + artère pulmonaire principale",d:"Qp/Qs = débit pulmonaire / débit systémique. Qp/Qs >1.5 = shunt significatif → indication de fermeture."},
+{s:"Angio-RM 3D ± MRA veines pulmonaires",d:"Rechercher PAPVR (retour veineux pulmonaire anormal partiel). SINUS VENOSUS = TOUJOURS chercher PAPVR associé (quasi-systématique)."}
+],
+pt:["Secundum 70%, sinus venosus 15–20%, primum (canal AV partiel), coronary sinus (rare).","Qp/Qs >1.5 = indication de fermeture (percutanée si secundum, chirurgicale si sinus venosus/primum).","Sinus venosus → PAPVR droite supérieure quasi-systématique → TOUJOURS la chercher."],
+traps:["Le Qp/Qs en apnée peut être faussé par la variation de précharge → préférer PC en free-breathing pour les shunts."]},
+
+TOF:{tg:["rv","shunt"],n:"Tétralogie de Fallot réparée",w:"Suivi : IP résiduelle, dilatation VD, dysfonction VD, timing de ré-intervention sur valve pulmonaire.",
+pr:[
+{s:"Cinés SSFP — stack SA complet + RVOT dédié",d:"Volumes VD indexés et FEVD = paramètres clés de suivi. Seuils de ré-intervention : RVEDVi >150 mL/m² ou RVESVi >80 mL/m² (mais varient selon guidelines)."},
+{s:"PC artère pulmonaire (perpendiculaire, au-dessus de la valve)",d:"RF pulmonaire directement mesurée. >40% = sévère. Seuils combinant RF + volumes VD pour décision."},
+{s:"PC aorte ascendante",d:"IAo résiduelle (fréquente dans la TOF réparée, dilatation racine aortique). Mesurer aussi."},
+{s:"LGE PSIR",d:"Fibrose VD (patch RVOT, zone de ventriculotomie). Fibrose VG (facteur pronostique indépendant). LGE = substrat arythmogène."},
+{s:"Angio-RM AP (si sténose de branche suspectée)",d:"Sténose résiduelle branche AP droite ou gauche."}
+],
+pt:["RVEDVi + FEVD + RF pulmonaire = 3 paramètres clés du suivi longitudinal.","Seuils de ré-intervention : RVEDVi >150, RVESVi >80, FEVD <47% (ESC 2020). AHA plus conservateur.","IAo résiduelle fréquente (dilatation racine) → toujours mesurer.","LGE VD et VG = corrélé au risque arythmique.","Suivi CMR annuel ou biannuel recommandé."],
+traps:["Ne pas oublier l'IAo (souvent négligée au profit de l'IP).","Les seuils de ré-intervention varient entre guidelines → connaître les recommandations locales."]},
+
+Coarctation:{tg:["shunt"],n:"Coarctation aortique (native ou post-réparation)",w:"Gradient résiduel, collatérales, anévrisme post-chirurgical.",
+pr:[
+{s:"Cinés SSFP — SA + LA",d:"HVG (surcharge pression chronique). Fonction VG."},
+{s:"Angio-RM 3D aorte thoracique",d:"Anatomie de la coarctation/réparation. Anévrisme post-chirurgical (faux anévrisme au site de réparation). Collatérales intercostales et mammaires internes dilatées."},
+{s:"PC au site de coarctation",d:"Gradient résiduel. Pattern de flux : pic systolique prolongé + FLUX DIASTOLIQUE PERSISTANT = coarctation significative (le flux diastolique est le signe le plus spécifique)."},
+{s:"PC aorte descendante distale",d:"Rapport flux descendant/ascendant. Collatéralité importante = sévérité/chronicité."}
+],
+pt:["Angio-RM 3D = examen de référence pour l'anatomie.","Flux diastolique persistant au PC = signe le plus spécifique de coarctation significative.","Collatérales dilatées = signe de sévérité chronique.","Surveiller anévrisme au site de réparation (récidive, faux anévrisme → risque de rupture)."],
+traps:["Ne pas se fier uniquement au gradient de pic systolique — le flux diastolique est plus spécifique."]},
+
+AR:{tg:["valve_ar"],n:"Insuffisance aortique",w:"Quantifier la fuite, retentissement VG, morphologie aortique et valvulaire.",
+pr:[
+{s:"Cinés SSFP — 3C + LVOT + SA",d:"Morphologie valve (bicuspidie? prolapsus cuspal?). Jet de régurgitation (excentricité, direction). Dilatation VG excentrique si IAo chronique."},
+{s:"Ciné cross-section valve aortique",d:"Identifier bicuspidie : type de fusion (R-L >> R-N > L-N). Raphé. Calcifications."},
+{s:"PC aorte ascendante (perpendiculaire, jonction ST)",d:"Mesurer forward flow et backward flow. RF = backward/forward flow. VENC départ 150–250 cm/s, ajuster pour éviter aliasing. Vérifier correction d'offset de phase."},
+{s:"Angio-RM 3D aorte (si dilatation suspectée)",d:"Mesurer en plans orthogonaux corrigés : anneau, sinus de Valsalva, jonction sino-tubulaire, aorte ascendante tubulaire, crosse, isthme."}
+],
+pt:["RF >33% associé à progression clinique/chirurgicale. Ancien seuil >48% pour sévère (non universel).","Flux holodiastolique inverse dans l'aorte descendante = IAo sévère.","Bicuspidie → TOUJOURS chercher : coarctation associée + dilatation aorte ascendante.","CMR = gold standard pour les volumes VG (retentissement chronique)."],
+traps:["Bien positionner le plan PC perpendiculaire au flux et pas trop proche de la valve (turbulence = aliasing)."]},
+
+MR:{tg:["valve_mr"],n:"Insuffisance mitrale",w:"Quantifier la fuite, différencier organique (primaire) vs fonctionnelle (secondaire), guide pré-opératoire / pré-clip.",
+pr:[
+{s:"Cinés multi-axes à travers les scallops (P1-P2-P3/A1-A2-A3)",d:"Identifier le MÉCANISME (Carpentier) : Type II (prolapsus/flail → quel scallop?), Type IIIb (tenting → ischémique/fonctionnelle), Type I (dilatation annulaire)."},
+{s:"Cinés SSFP — stack SA + 2C/3C/4C",d:"Mesurer volumes VG (EDV, ESV, SV). Dilatation OG."},
+{s:"PC aorte ascendante",d:"Mesurer débit aortique antérograde (forward flow)."},
+{s:"Quantification volumétrique",d:"RV IM = SVVG (EDV−ESV en ciné) − débit Ao antérograde (PC). RF = RV/SVVG. C'est la méthode de RÉFÉRENCE en CMR (pas le PC direct sur le jet mitral qui est imprécis)."}
+],
+pt:["Méthode volumétrique = gold standard CMR. Pas de PC direct sur jet mitral.","IM primaire : RV >55 mL ou RF >40% associé à événements/chirurgie.","IM secondaire : seuils ESC plus bas (EROA ≥20 mm², RV ≥30 mL en écho). Pas de seuil CMR formel consensuel pour IM secondaire.","COAPT vs MITRA-FR : IM fonctionnelle disproportionnée (SOR ≥30 mm² avec VTD <96 mL/m²) = bénéfice MitraClip."],
+traps:["Ne pas appliquer les seuils d'IM primaire à une IM fonctionnelle (seuils plus bas).","Toujours vérifier la cohérence des volumes et exclure une autre fuite significative concomitante (IAo, IT)."]},
+
+TR:{tg:["valve_tr"],n:"Insuffisance tricuspide",w:"Quantifier la fuite droite, retentissement VD, bilan pré-TEER tricuspide.",
+pr:[
+{s:"Cinés SSFP — 4C + VD dédié",d:"Coaptation, tethering, annulus tricuspide. Dilatation OD et VD."},
+{s:"Cinés stack SA complet",d:"Mesurer volumes VD : EDV, ESV, SV."},
+{s:"PC artère pulmonaire",d:"Débit pulmonaire antérograde."},
+{s:"Quantification volumétrique droite",d:"RV IT = SVVD (EDV−ESV ciné) − débit pulmonaire antérograde (PC). RF = RV IT / SVVD."}
+],
+pt:["Volumétrique droite = même principe que l'IM à gauche.","Seuils CMR moins standardisés que pour IM/IAo — interprétation intégrée avec l'écho.","Pré-TEER : taille annulus, tethering, anatomie sous-valvulaire, taille OD/VD."],
+traps:["Le VD est plus difficile à contourer que le VG → reproductibilité moindre."]},
+
+StressCMR:{tg:["stress_perf"],n:"IRM de stress (perfusion vasodilatateur)",w:"Recherche d'ischémie inductible, évaluation fonctionnelle d'une sténose intermédiaire.",
+pr:[
+{s:"Cinés SSFP repos (AVANT le stress)",d:"Fonction de base, cinétique segmentaire de repos. VÉRIFIER LA VALVE AORTIQUE (RAo serré = CI relative au stress)."},
+{s:"Perfusion first-pass STRESS — 3 coupes SA (base, mid, apex)",d:"Injection vasodilatateur (regadenoson ou adénosine) puis bolus GBCA 0.05 mmol/kg à 4–5 mL/s suivi de 20 mL flush NaCl. Acquisition dynamique sur ~60 battements (~40 sec). Rechercher DÉFAUT DE PERFUSION = zone sombre persistante pendant >5 battements consécutifs = ischémie."},
+{s:"Perfusion first-pass REPOS (≥10 min après stress)",d:"2e bolus GBCA 0.05 mmol/kg identique. Comparer au stress : défaut STRESS-ONLY (présent au stress, absent au repos) = ischémie inductible. Défaut FIXE (stress et repos) = infarctus/cicatrice. "},
+{s:"LGE PSIR (8–15 min post-2e injection)",d:"Dose totale = 0.1 mmol/kg (2×0.05). Cartographie cicatricielle + viabilité."}
+],
+pt:["Défaut de perfusion au stress réversible au repos = ischémie inductible.","Défaut fixe = infarctus/cicatrice.","Dark rim artifact : transitoire <4 battements, concentrique, suit le front de bolus → ≠ ischémie.","Se/Sp CMR stress : ~89%/87% (supérieur au SPECT).","MR-INFORM (NEJM 2019), CE-MARC : CMR stress non inférieur à FFR pour guider la revascularisation."],
+traps:["TOUJOURS vérifier la valve aortique en ciné AVANT de lancer le stress (RAo serré = CI relative).","Le dark rim artifact est le piège n°1 → <4 battements, concentrique, pas de correspondance en ciné.","Deux VVP nécessaires si adénosine (une pour perfusion médicament, une pour gadolinium)."]},
+
+Sarcoid:{tg:["sarcoid"],n:"Sarcoïdose cardiaque",w:"Troubles conductifs/rythmiques inexpliqués, dysfonction VG/VD, sarcoïdose systémique connue.",
+pr:[
+{s:"Cinés SSFP complet",d:"Fonction biV. Troubles cinétiques focaux (souvent basal septal). Amincissement pariétal. Anévrisme VG possible."},
+{s:"T2 mapping / T2-STIR",d:"T2 augmenté = inflammation granulomateuse ACTIVE. Guide la décision de traitement immunosuppresseur (corticoïdes). Si T2 normal = maladie cicatricielle."},
+{s:"T1 mapping natif + ECV",d:"T1 et ECV augmentés dans les zones atteintes."},
+{s:"LGE PSIR — couverture complète",d:"LGE PATCHY MÉSOCARDIQUE/SOUS-ÉPICARDIQUE, souvent basal septal et latéral. Typiquement MULTIFOCAL. Pattern non ischémique mais distinct de la myocardite (plus patchy, plus multifocal, prédominance basale). Peut atteindre le VD."}
+],
+pt:["LGE patchy multifocal mésocardique = évocateur mais non pathognomonique.","T2+ en zone de LGE = inflammation granulomateuse active → indication de corticoïdes.","Corrélation PET-FDG 18F : PET+ (captation myocardique focale en régime sans glucides) = inflammation active.","BAV inexpliqué chez un sujet jeune → TOUJOURS évoquer sarcoïdose cardiaque.","LGE = substrat arythmogène → discussion DAI indépendamment de la FEVG (recommandation HRS 2014)."],
+traps:["La sarcoïdose peut mimer une myocardite (sous-épicardique) ou une CMH (épaississement focal) → le contexte clinique est essentiel.","Le PET-FDG est complémentaire de l'IRM (activité métabolique vs cicatrice)."]},
+
+CardioOnco:{tg:["cardio_onco"],n:"Cardio-oncologie (toxicité cardiaque)",w:"Surveillance toxicité anthracyclines, ICI (immunothérapie checkpoint inhibitor), trastuzumab.",
+pr:[
+{s:"Cinés SSFP complet (idéalement : CMR BASELINE avant traitement)",d:"FEVG de référence. GLS si feature tracking disponible (plus sensible que FEVG pour détecter toxicité précoce). Volumes VG indexés."},
+{s:"T1 mapping natif + ECV",d:"Biomarqueurs précoces de fibrose (anthracyclines) ou inflammation (ICI myocarditis). Élévation PRÉCOCE avant baisse FEVG (signal d'alarme). ECV augmenté sous anthracyclines = dommage myocardique."},
+{s:"T2 mapping",d:"T2 augmenté = myocardite à ICI (URGENCE THÉRAPEUTIQUE, mortalité ~50% si non traitée). Critère T2 de Lake Louise."},
+{s:"LGE PSIR",d:"Myocardite ICI : LGE non ischémique (sous-épicardique/mésocardique, pattern myocardite). Toxicité anthracyclines chronique : LGE rarement présent (la fibrose est diffuse, captée par T1/ECV et non par LGE)."}
+],
+pt:["Anthracyclines : baisse FEVG >10 points ou FEVG <50% = cardiotoxicité → arrêt/réduction dose + traitement cardio-protecteur.","Myocardite ICI : URGENCE. T2 élevé + LGE non ischémique + troponine élevée + arythmie. Traitement : méthylprednisolone IV haute dose en urgence.","CMR baseline avant traitement = idéal pour suivi longitudinal (permet de détecter les changements précoces).","GLS (strain par feature tracking) est plus sensible que FEVG pour la toxicité précoce."],
+traps:["Ne pas attendre la baisse de FEVG pour agir — T1/ECV/GLS détectent la toxicité plus tôt.","Myocardite ICI = peut être fatale rapidement → ne pas temporiser."]},
+
+Pericarditis:{tg:["pericardium","chest_injury"],n:"Péricardite / constriction / myopéricardite",w:"Douleur thoracique, épanchement, constriction suspecte, différentiel avec restriction.",
+pr:[
+{s:"Cinés SSFP — 4C + SA (incluant le péricarde)",d:"Épanchement péricardique (quantifier : minime <100 mL, modéré 100–500, abondant >500). Épaississement péricardique (>4 mm)."},
+{s:"Ciné temps réel FREE BREATHING (SA mid)",d:"DEMANDER AU PATIENT DE RESPIRER NORMALEMENT. Rechercher le SEPTAL BOUNCE respiratoire = déplacement inspiratoire du septum vers le VG en diastole = interdépendance ventriculaire = signe de CONSTRICTION. C'est LA séquence clé pour la constriction."},
+{s:"T2-STIR / T2 mapping péricardique",d:"Hypersignal T2 péricardique = inflammation ACTIVE. Guide le traitement anti-inflammatoire."},
+{s:"LGE PSIR péricardique",d:"Rehaussement péricardique = inflammation. Peut persister après résolution des symptômes."},
+{s:"T1 mapping myocardique",d:"Si myopéricardite : T1 myocardique augmenté. Si constriction vs restriction : T1/ECV myocardique NORMAL (constriction pure) vs ÉLEVÉ (restriction par amylose/autre infiltration)."},
+{s:"PC real-time free-breathing (10 sec, flux mitral/tricuspide)",d:"Variation respiratoire du flux mitral >25% et tricuspide >40% = constriction."}
+],
+pt:["Constriction : épaississement péricardique ≥4 mm + septal bounce + VCI dilatée + ± épanchement. MAIS constriction possible avec péricarde d'épaisseur NORMALE.","Ciné real-time free-breathing = séquence CLÉ pour le septal bounce (NE PAS faire en apnée — le patient doit respirer).","Constriction vs restriction : T1/ECV myocardique normal (constriction) vs élevé (amylose/restriction infiltrative). Strain latéral/septal ratio aide aussi.","Péricardite active : T2+ péricardique + LGE péricardique → AINS/colchicine/corticoïdes."],
+traps:["Ne pas oublier de faire le ciné en FREE BREATHING pour la constriction (le septal bounce n'est visible QU'EN respirant).","La constriction est possible avec un péricarde d'épaisseur normale (constriction 'non calcifiée')."]},
+
+Athlete:{tg:["athlete"],n:"Cœur d'athlète",w:"Différentiel CMH/ACM/CMD chez sportif : HVG zone grise (13–15 mm), VD dilaté, FEVG basse limite.",
+pr:[
+{s:"Cinés SSFP complet",d:"Dilatation HARMONIEUSE des 4 cavités. FEVG et FEVD PRÉSERVÉES. Épaisseur max 13–15 mm (zone grise avec CMH). Pas de dyskinésie VD focale (≠ ACM)."},
+{s:"T1 mapping natif + ECV",d:"T1/ECV NORMAUX = adaptation physiologique. Si T1/ECV AUGMENTÉS = pathologique (CMH, myocardite, etc.). C'est le critère DISCRIMINANT dans la zone grise."},
+{s:"LGE PSIR complet",d:"ABSENT = athlète. PRÉSENT = pathologique (CMH, myocardite ancienne, ACM). EXCEPTION BÉNIGNE : LGE aux points d'insertion VD (RV insertion point fibrosis) = fréquent chez l'athlète d'endurance, considéré comme bénin."},
+{s:"T2 mapping",d:"Normal en adaptation physiologique. Augmenté → myocardite récente (cause fréquente de mort subite du sportif — penser à un épisode viral récent)."}
+],
+pt:["Zone grise épaisseur 13–15 mm : T1/ECV + LGE tranchent entre CMH et adaptation.","VD dilaté chez l'endurant = normal si : dilatation symétrique biV, FEVD préservée, PAS de dyskinésie focale. ≠ ACM.","LGE aux points d'insertion VD = bénin chez l'endurant (ne pas confondre avec CMH ou ACM).","Déconditionnement 3 mois : régression de l'HVG si athlète, pas si CMH (mais test pragmatique difficile)."],
+traps:["Ne pas diagnostiquer une ACM chez un cycliste avec un VD dilaté harmonieux sans dyskinésie focale.","Ne pas diagnostiquer une LVNC chez un athlète avec hypertrabéculation apicale modérée."]},
+
+Mass:{tg:["mass"],n:"Masse / pseudomasse / thrombus",w:"Caractérisation tissulaire complète. Voir aussi l'onglet Masses pour l'arbre décisionnel et le tableau comparatif.",
+pr:[
+{s:"Cinés SSFP — plans orthogonaux centrés sur la lésion",d:"Évaluer : taille, MOBILITÉ (pédiculé? sessile?), site d'attache (fosse ovale? valve? paroi libre?), effet de masse, envahissement des structures adjacentes."},
+{s:"T1 SANS fat-sat",d:"Signal T1 intrinsèque : HYPER = graisse (lipome) ou mélanine (mélanome métastatique). HYPO = calcification, fer, thrombus ancien, fibrome."},
+{s:"T1 AVEC fat-sat",d:"CHUTE DE SIGNAL en fat-sat = LIPOME (diagnostic en 2 séquences). PAS de chute + T1 hyper intrinsèque = mélanome (mélanine ≠ graisse)."},
+{s:"T2 / T2-STIR",d:"HYPER = liquidien, kystique, myxoïde (myxome). HYPO = fibreux (fibrome — quasi-pathognomonique en pédiatrique). HÉTÉROGÈNE = sarcome."},
+{s:"Perfusion first-pass",d:"REHAUSSEMENT PRÉCOCE = vascularisé = TUMEUR. ABSENT = avasculaire = THROMBUS. C'est le critère le plus important pour le diagnostic différentiel thrombus vs tumeur."},
+{s:"LGE PSIR (TI standard)",d:"Rehaussement tumoral. Pattern hétérogène avec zones de nécrose = malin."},
+{s:"LGE long TI (~600 ms à 1.5T / ~875 ms à 3T)",d:"Séquence THROMBUS : le thrombus apparaît NOIR (avasculaire) sur fond gris/blanc. La tumeur REHAUSSE. C'est la séquence discriminante thrombus vs tumeur."},
+{s:"EGE (Early Gadolinium Enhancement, 1–3 min post-injection)",d:"Rehaussement précoce = tumoral vascularisé. Absence = thrombus."}
+],
+pt:["Protocole masse complet = Ciné + T1 ± fat-sat + T2 + first-pass + LGE standard + LGE long TI.","First-pass : rehaussement = tumeur, absent = thrombus (critère n°1).","Lipome : T1 hyper + chute en fat-sat = diagnostic en 2 séquences.","Fibrome : T2 HYPO + LGE intense homogène (pédiatrique).","Pseudomasses fréquentes : crista terminalis, valve d'Eustache, réseau de Chiari, hypertrophie lipomateuse du SIA (épargne fosse ovale, dumbbell)."],
+traps:["Ne pas oublier le LGE long TI pour le thrombus (le LGE standard peut manquer un thrombus car le contraste avec le myocarde rehaussé est insuffisant).","Mélanome métastatique = T1 hyper SANS chute en fat-sat (la mélanine est hyperintense T1 mais n'est pas de la graisse)."]},
+
+LVNC:{tg:["lvnc"],n:"Non-compaction VG",w:"Hypertrabéculation, doute diagnostique (surdiagnostic fréquent).",
+pr:[
+{s:"Cinés SSFP — SA + 4C + 2C",d:"Mesurer rapport non-compacté/compacté en TÉLÉDIASTOLE. Critère Petersen : NC/C >2.3. Segments apicaux et latéraux surtout atteints."},
+{s:"LGE PSIR",d:"Fibrose = facteur pronostique. Si fibrose + dysfonction = mauvais pronostic."},
+{s:"T1/ECV",d:"Augmentés si myocardiopathie associée."}
+],
+pt:["ATTENTION : surdiagnostic MAJEUR. L'hypertrabéculation est fréquente et physiologique chez : sportif, femme enceinte, drépanocytaire, sujet d'origine africaine.","LVNC 'vraie' = association avec : dysfonction VG + événements emboliques + arythmies.","Si FEVG normale + pas de LGE + pas d'arythmie = probablement hypertrabéculation physiologique bénigne.","Toujours chercher un thrombus dans les récessus trabéculaires profonds."],
+traps:["Le critère NC/C >2.3 a une spécificité médiocre → ne pas poser le diagnostic sur ce seul critère."]},
+
+Iron:{tg:["iron"],n:"Surcharge en fer myocardique",w:"Hémochromatose, thalassémie majeure, transfusions multiples.",
+pr:[
+{s:"T2* multi-écho GRE (séquence dédiée fer)",d:"ROI SEPTAL mid-ventriculaire en SA. ÉVITER le sang et le poumon dans le ROI (contamination). T2* >20 ms = normal. 10–20 ms = surcharge modérée (intensifier chélation). <10 ms = surcharge SÉVÈRE (risque IC et arythmie, risque vital)."},
+{s:"Cinés SSFP",d:"FEVG et volumes. La FEVG peut rester normale longtemps avant de chuter BRUTALEMENT."},
+{s:"T2* hépatique (si demandé)",d:"Même principe, ROI hépatique. Concentration en fer hépatique corrélée."}
+],
+pt:["T2* >20 ms = rassurant. 10–20 = modéré. <10 = sévère (risque vital).","La FEVG peut rester normale longtemps puis chuter brutalement → le T2* est plus précoce que la FEVG.","Suivi ANNUEL par T2* recommandé sous chélation."],
+traps:["ROI mal placé (incluant sang ou poumon) → valeur T2* faussée."]},
+
+PreAblation:{tg:["arrhythmia"],n:"Bilan pré-ablation (FA / TV / flutter)",w:"Anatomie des veines pulmonaires (FA), cartographie du substrat cicatriciel (TV).",
+pr:[
+{s:"Angio-RM 3D veines pulmonaires (si FA)",d:"Anatomie des VP : nombre (normalement 4), diamètre, variantes (tronc commun gauche, VP surnuméraire, branchement précoce). Intégration dans le système de navigation 3D (CARTO/EnSite)."},
+{s:"Cinés SSFP complet",d:"Fonction biV. Rechercher cardiopathie sous-jacente."},
+{s:"LGE PSIR — couverture complète",d:"Cartographie du SUBSTRAT CICATRICIEL pour guider l'ablation de TV. Le LGE délimite les zones de slow conduction = cibles d'ablation. Identification des isthmes entre cicatrice et valve/anneau."},
+{s:"LGE OG haute résolution (si ablation FA repeat)",d:"Évaluer les cicatrices OG post-ablation antérieure. Gaps dans les lignes d'isolation des VP = cibles pour ré-intervention."}
+],
+pt:["FA : anatomie VP + fibrose OG (score Utah) guident la stratégie d'ablation.","TV ischémique : LGE = cartographie du substrat. Identification des isthmes critiques.","TV non ischémique : LGE méso/épicardique → approche épicardique parfois nécessaire (chirurgicale ou percutanée subxiphoïdienne).","Intégration 3D du LGE dans le système de navigation (fusion IRM-cartographie)."],
+traps:["La résolution du LGE standard peut être insuffisante pour les petites cicatrices OG → utiliser des séquences 3D haute résolution dédiées."]}
+};
+
+// ═══ MOTIFS ═══
+const MOT={hvg:["hvg","hypertroph","paroi épais","wall thick","cmh","hcm","amylose","fabry","épaississement","hypertensive"],chest_injury:["douleur thoracique","chest pain","troponin","troponine","stemi","nstemi","myocardit","pericardit","takotsubo","minoca","inoca","infarctus","ischémi","ischemia","sus-st","sca "],rv:["vd dilat","rv dilat","dysplasie","davd","acm","arvc","arrhythmogenic","papvr","cia","asd","shunt","fallot","tetralogy"],shunt:["cia","asd","civ","vsd","fop","pfo","shunt","qp/qs","papvr","sinus venosus","coarctation"],valve_ar:["iao","insuffisance aort","aortic regurg","regurgitation aortique"],valve_mr:["im ","insuffisance mitr","mitral regurg","fuite mitrale","prolapsus mitral"],valve_tr:["it ","insuffisance tricusp","tricuspid regurg","fuite tricusp","teer tricusp"],mass:["masse","mass","tumor","tumeur","thrombus","myxom","fibroelast","lipom","sarcom","metast","pseudomass","lymphom"],dcm:["cmd","dcm","dilat","févg basse","lvef low","heart failure","insuffisance cardiaque","cardiomyopathie dilatée"],amyloid:["amylose","amyloid","attr","tafamidis","transthyretine","chaines legeres"],fabry:["fabry","anderson-fabry","alpha galactosidase"],iron:["hemochrom","thalass","surcharge en fer","iron overload","t2*","chelat"],sarcoid:["sarcoid","sarcoïd","granulomat","bav inexpliqué"],lvnc:["non compaction","lvnc","trabécul","hypertrabecul"],pericardium:["pericard","constrict","épanchement","effusion","tamponnade"],arrhythmia:["esv","extrasystol","tv ","tachycardie ventriculaire","ventricular tachy","mort subite","sudden death","syncope","arythm","arrhythm","ablation","flutter","fibrillation atrial","fa rapide","pvc"],stress_perf:["stress","perfusion","ischem.*test","effort","adénosine","regadenoson","stenose intermediaire"],cardio_onco:["anthracycl","immunothérap","checkpoint","cardio-onco","cardiotoxic","trastuzumab","doxorubicine","pembrolizumab","nivolumab"],athlete:["sportif","athlete","cœur d'athlète","marathon","endurance","cyclisme","zone grise"]};
+// ═══ MASSES ═══
+const MS=[
+{n:"Thrombus",c:"—",loc:"Auricule G (FA) · apex VG (CMD/IDM)",sig:"T1 hypo chronique / iso-hyper aigu. T2 hypo chronique.",lge:"ABSENT (avasculaire). Long TI : NOIR.",fp:"Absent (pas de rehaussement first-pass)",mob:"Sessile, peu mobile",key:"Paroi sous-jacente AKINÉTIQUE. Pas de first-pass. Défect CT précoce."},
+{n:"Myxome",c:"B",loc:"OG 75%, fosse ovale, pédiculé",sig:"T1 iso/hyper hétérogène. T2 hypersignal.",lge:"Rehaussement hétérogène.",fp:"Présent (vascularisé)",mob:"TRÈS mobile, pédiculé, prolapsus diastolique",key:"Pédiculé fosse ovale. Risque embolique. Carney si multiples. Sx constitutionnel."},
+{n:"Fibroélastome",c:"B",loc:"Surface valvulaire (Ao >> M)",sig:"T1 iso. T2 iso/hyper.",lge:"Variable, souvent faible.",fp:"Faible",mob:"Mobile, pédiculé (anémone de mer)",key:"Petit < 1,5 cm. Risque embolique cérébral. Chirurgie si >1 cm / mobile / symptomatique."},
+{n:"Lipome / HLP du SIA",c:"B",loc:"Variable (lipome) / SIA (pseudo-masse)",sig:"T1 HYPER franc. Fat-sat : CHUTE SIGNAL = diagnostic.",lge:"Absent.",fp:"Absent/minime",mob:"Immobile",key:"HLP du SIA : >2 cm, ÉPARGNE fosse ovale, forme dumbbell. PAS de chirurgie pour HLP."},
+{n:"Rhabdomyome",c:"B",loc:"VG/VD (enfant), multiples, intramural",sig:"T1 iso. T2 hyper.",lge:"Minime.",fp:"Faible",mob:"Immobile, intramural",key:"Tumeur pédiatrique n°1. Sclérose tubéreuse (50–80%). Régression spontanée fréquente."},
+{n:"Fibrome",c:"B",loc:"Septum / paroi VG (enfant), unique, intramural",sig:"T1 iso/hypo. T2 HYPO (fibrose) = quasi-pathognomonique.",lge:"INTENSE et HOMOGÈNE.",fp:"Variable",mob:"Immobile, intramural",key:"Tumeur pédiatrique n°2. Calcifié. Risque ARYTHMIQUE. T2 bas = fibrose = diagnostic."},
+{n:"Sarcome (angiosarcome ++)",c:"M",loc:"OD, péricarde (angiosarcome). Variable (autres)",sig:"T1 hétérogène (hémorragie). T2 hétérogène.",lge:"Intense, hétérogène, nécrose centrale.",fp:"Intense hétérogène",mob:"Peu mobile, infiltrant, volumineux",key:"Malin primitif n°1. Épanchement HÉMORRAGIQUE. Invasion péricardique. Médiane survie < 1 an."},
+{n:"Lymphome cardiaque primitif",c:"M",loc:"Pluricavitaire, myocarde, péricarde",sig:"T1 iso/hypo. T2 iso/léger hyper.",lge:"Homogène modéré.",fp:"Modéré homogène",mob:"Immobile, infiltrant massivement",key:"Quasi-exclusif immunodéprimé. Infiltration massive. CHIMIOSENSIBLE. Biopsie indispensable."},
+{n:"Métastases",c:"M",loc:"Péricarde >> myocarde >> endocarde",sig:"Variable selon primitif.",lge:"Variable.",fp:"Variable",mob:"Variable",key:"20–40× plus fréquentes que primitives. Poumon, sein, mélanome, lymphome, rein. Souvent multiples. Épanchement péricardique."}
+];
+
+// ═══ TABLES ═══
+const TBL=[
+{t:"Normes ventriculaires CMR adultes",h:["Mesure indexée","Hommes","Femmes"],r:[
+["LVEDVi (mL/m²)","77 ± 15 · ULN 107","69 ± 12 · ULN 93"],
+["LVESVi (mL/m²)","29 ± 9 · ULN 47","24 ± 7 · ULN 38"],
+["LVEF (%)","63 ± 6 · LLN 51","66 ± 7 · LLN 52"],
+["LV mass index (g/m²)","56 ± 10 · ULN 75","45 ± 7 · ULN 59"],
+["RVEDVi (mL/m²)","88 ± 17 · ULN 123","76 ± 14 · ULN 104"],
+["RVESVi (mL/m²)","38 ± 11 · ULN 59","30 ± 9 · ULN 48"],
+["RVEF (%)","méthode-dépendant · ~55–65","~55–65"]]},
+
+{t:"Normes auriculaires CMR (méthode biplan area-length)",h:["Mesure","Hommes","Femmes"],r:[
+["OG max vol/BSA (mL/m²)","38 ± 11 · ULN 59","39 ± 11 · ULN 61"],
+["OD max vol/BSA (mL/m²)","38 ± 12 · ULN 61","35 ± 10 · ULN 54"]]},
+
+{t:"T1 natif — valeurs normales par champ (MOLLI)",h:["Champ","Myocarde normal","Amylose","Fabry","Fer"],r:[
+["1.5T","950–1050 ms","> 1100 ms","< 900 ms (avant fibrose)","Abaissé (T2* < 20)"],
+["3T","1150–1250 ms","> 1300 ms","< 1100 ms","Abaissé"]]},
+
+{t:"T2 mapping — valeurs normales",h:["Champ","Myocarde normal","Myocardite/œdème"],r:[
+["1.5T","45–55 ms (séquence-dépendant)","Augmenté > 2 SD au-dessus de la normale"],
+["3T","40–50 ms","Augmenté > 2 SD"]]},
+
+{t:"ECV — repères pratiques",h:["Condition","ECV attendu"],r:[
+["Normal","25–30% (dépend site/séquence)"],
+["CMD non ischémique","30–35%"],
+["Amylose cardiaque","Souvent > 40% (jusqu'à 60–70%)"],
+["CMH","28–35%"],
+["Fabry (avant fibrose)","Normal ou bas (sphingolipides intracellulaires)"],
+["Myocardite aiguë","Augmenté focalement"]]},
+
+{t:"Viabilité — transmuralité du LGE et pronostic",h:["Transmuralité LGE","Récupération post-revascularisation"],r:[
+["0%","Récupération très probable"],
+["1–25%","Récupération très probable"],
+["26–50%","Récupération possible (~50%)"],
+["51–75%","Récupération peu probable"],
+["> 75%","Irréversible (segment non viable)"],
+["Épaisseur < 5.5 mm","Amincissement cicatriciel = non viable"]]},
+
+{t:"Lake Louise 2018 — critères de myocardite",h:["Domaine","Critère positif"],r:[
+["T2-based (œdème)","T2 mapping régional ou global augmenté OU hypersignal T2 focal"],
+["T1-based","T1 natif augmenté OU ECV augmenté OU LGE non ischémique (sous-épi/mésocardique)"],
+["Diagnostic","≥ 1 critère T2 + ≥ 1 critère T1 = myocardite active"],
+["Supportif","Épanchement péricardique, dysfonction VG, LGE péricardique"]]},
+
+{t:"Sévérité des régurgitations par CMR",h:["Paramètre","Légère","Modérée","Sévère"],r:[
+["RF IAo","> 33% = significatif","","(ancien seuil > 48% non universel)"],
+["RV / RF IM primaire","","","RV > 55 mL ou RF > 40%"],
+["RF IP (congénital)","< 20%","20–40%","> 40%"],
+["RF IT","Peu standardisé","","Intégrer clinique + écho"]]},
+
+{t:"HCM Risk-SCD (ESC) — variables et seuils",h:["Variable","Détail"],r:[
+["Âge","Inclus dans le score (risque diminue avec l'âge)"],
+["Épaisseur max VG","En mm, télédiastole (IRM > écho)"],
+["Diamètre OG","En mm, parasternal GA écho ou IRM"],
+["Gradient LVOT max","Repos + Valsalva, en mmHg"],
+["TVNS au Holter","≥ 3 battements ≥ 120 bpm"],
+["Réponse TA anormale effort","Chute ou non-augmentation de la PAS à l'effort"],
+["ATCD familiaux mort subite","Mort subite < 50 ans chez un apparenté 1er degré"],
+["→ Seuil ≥ 6%","DAI recommandé (classe IIa)"],
+["→ Zone grise 4–6%","À discuter (classe IIb). LGE ≥ 15% = modificateur fort."],
+["→ < 4%","DAI non recommandé"]]},
+
+{t:"Critères TFC 2010 — ACM (résumé CMR)",h:["Critère","Majeur","Mineur"],r:[
+["Anomalie cinétique VD régionale","Akinésie, dyskinésie ou anévrisme VD","Hypokinésie VD régionale"],
+["+ RVEDVi","≥ 110 mL/m² (H) ou ≥ 100 (F)","100–110 (H) ou 90–100 (F)"],
+["OU RVEF","< 40%","40–45%"]]},
+
+{t:"Contre-indications au stress pharmacologique",h:["Agent","CI absolues","CI relatives"],r:[
+["Vasodilatateurs (adénosine, regadenoson, dipyridamole)","Asthme/bronchospasme actif · BAV II-III sans PM · Bradycardie sinusale < 45 bpm","RAo serré (AVA < 1 cm², gradient > 50 mmHg) · Hypotension < 90 mmHg · IC décompensée · Sténose carotidienne sévère · Myocardite/péricardite active"],
+["Dobutamine","HTA sévère ≥ 220/120 · RAo serré (AVA < 1 cm²) · CMH obstructive · Arythmie ventriculaire non contrôlée","FA rapide non contrôlée · Anévrisme aortique volumineux"]]},
+
+{t:"Préparation patient avant stress",h:["Item","Détail"],r:[
+["Caféine","Stop 12–24h (café, thé, chocolat, Coca, Red Bull, médicaments contenant caféine)"],
+["Dipyridamole oral","Stop 48h (si adénosine/regadenoson prévu)"],
+["Bêtabloquants","Stop 24h (si dobutamine prévu)"],
+["Nitrates","Stop 24h (si dobutamine prévu)"],
+["Théophylline","Stop 24h"],
+["À jeun","≥ 3h avant le stress"],
+["Voies veineuses","2 VVP si adénosine (1 médicament + 1 gadolinium). 1 VVP suffit pour regadenoson (bolus)"],
+["Monitoring","ECG + PA + SpO2 continu"],
+["Urgence","Chariot accessible. Aminophylline préparée (50–250 mg IV). Atropine. Bêtabloquant IV (esmolol)."]]}
+];
+
+const STR={h:["Agent","Dose","Timing CMR","CI principales","Antidote / conduite"],r:[
+["Adénosine","140 µg/kg/min IV continu 6 min. Possible ↑ 210 µg/kg/min si réponse insuffisante.","Perfusion pendant le first-pass stress (ne pas arrêter l'adénosine pendant l'acquisition).","Asthme · BAV II-III sans PM · Brady < 45 bpm","Arrêt perfusion (demi-vie ~10 sec). Aminophylline 50–125 mg IV si effets persistants."],
+["Regadenoson","0,4 mg IV bolus unique en 10 sec + flush NaCl. Non adapté au poids.","GBCA ~45–60 sec après le bolus. Attendre ≥ 10 min avant perfusion repos.","BAV II-III sans PM · IC décompensée · Hypotension sévère","Aminophylline 50–250 mg IV lente si effets sévères persistants."],
+["Dipyridamole","0,56 mg/kg IV sur 4 min.","Attendre pic vasodilatateur (4–8 min) puis first-pass.","Bronchospasme · BAV avancé · Stop caféine 12–24h","Aminophylline 125–250 mg IV (effets durent 15–25 min)."],
+["Dobutamine","Paliers 3 min : 5 → 10 → 20 → 30 → 40 µg/kg/min. Atropine (0,25–2 mg) si FC insuffisante. Ciné à chaque palier.","Ciné wall motion à chaque palier (pas perfusion first-pass).","HTA ≥ 220/120 · RAo serré · CMH obstructive · TV non contrôlée","Arrêt perfusion. Esmolol/métoprolol IV si ischémie/arythmie."]
+]};
+
+// ═══ SCORING ENGINE ═══
+function sc(txt){
+const T=N(txt),hits={};
+for(const[tag,arr]of Object.entries(MOT))if(arr.some(x=>T.includes(N(x))))hits[tag]=1;
+const res=[];
+for(const[k,d]of Object.entries(DX)){
+let s=0;d.tg.forEach(t=>{if(hits[t])s+=2});
+const B=(rx,v)=>{if(rx.test(T))s+=v};
+B(/cmh|hcm|sam|obstruct/,k==='HCM'?1.5:0);
+B(/amyloid|amylose|attr|restrict|discordance/,k==='Amyloid'?1.5:0);
+B(/fabry/,k==='Fabry'?2.5:0);
+B(/acm|arvc|davd|dysplasi/,k==='ACM'?2.5:0);
+B(/cia|asd|papvr|sinus venosus/,k==='ASD'?2.5:0);
+B(/fallot|tetralogie|tetralogy|ip resid/,k==='TOF'?3:0);
+B(/coarctation|coarct/,k==='Coarctation'?3:0);
+B(/iao|insuffisance aort|aortic regurg/,k==='AR'?2.5:0);
+B(/(im |insuffisance mitr|mitral regurg|prolapsus)/,k==='MR'?2.5:0);
+B(/(it |insuffisance tricusp|teer)/,k==='TR'?2.5:0);
+B(/(mass|masse|tumor|tumeur|thrombus|myxom)/,k==='Mass'?2:0);
+B(/myocardit|lake louise/,k==='Myocarditis'?1.5:0);
+B(/infarct|viabilit|stemi|nstemi/,k==='Infarct'?1.5:0);
+B(/minoca/,k==='MINOCA'?3:0);B(/inoca|microvasc/,k==='INOCA'?3:0);
+B(/takotsubo|tako|ballonis/,k==='Takotsubo'?3:0);
+B(/(tv |esv|extrasystol|mort subite|sudden|syncope suspecte)/,k==='VT_SCD'?2:0);
+B(/cardiomyopathie rythmique|tachycardie.*induit/,k==='RhythmicCMP'?3:0);
+B(/(pre.ablation|ablation fa|ablation tv|veines pulmonaires)/,k==='PreAblation'?2:0);
+B(/(stress|perfusion de stress|stenose intermediaire)/,k==='StressCMR'?2:0);
+B(/sarcoid|granulom|bav inexpliqué/,k==='Sarcoid'?2:0);
+B(/anthracycl|checkpoint|cardiotox|trastuzumab|immunother/,k==='CardioOnco'?2.5:0);
+B(/pericard|constrict|tampon/,k==='Pericarditis'?1.5:0);
+B(/sportif|athlete|marathon|endurance|zone grise/,k==='Athlete'?2:0);
+B(/(cmd|dcm|insuffisance cardiaque|fevg basse)/,k==='DCM'?1.5:0);
+B(/non.compaction|lvnc|trabecul/,k==='LVNC'?2:0);
+B(/surcharge.*fer|hemochrom|t2\*/,k==='Iron'?2:0);
+if(s>0.9)res.push({k,s});}
+res.sort((a,b)=>b.s-a.s);return res.slice(0,8);
+}
+
+// ═══ RENDER FUNCTIONS ═══
+function goTab(t){document.querySelectorAll('.tab').forEach(b=>{b.classList.toggle('on',b.dataset.t===t)});document.querySelectorAll('.P').forEach(s=>s.classList.remove('on'));$('s-'+t).classList.add('on');$('sc').scrollTo({top:0,behavior:'smooth'});}
+
+function renderRes(){
+const txt=$('ctx').value||'',hy=sc(txt),ks=hy.map(h=>h.k);
+let ap={l:'ok',m:'Indication cohérente pour CMR.'};
+if(!ks.length)ap={l:'wn',m:'Compléter le contexte clinique pour générer des hypothèses.'};
+let o=`<div class="badge ${ap.l==='ok'?'bok':'bwn'}">${ap.l==='ok'?'✓ Pertinent':'? Compléter le contexte'}</div><div class="sm" style="margin:6px 0 12px">${E(ap.m)}</div>`;
+
+// Hypotheses
+o+=`<h3>Hypothèses diagnostiques</h3>`;
+if(!hy.length)o+=`<div class="sm">Entrer un contexte clinique plus précis.</div>`;
+else{
+o+=`<div class="chips" style="margin-bottom:8px">${hy.map(x=>`<div class="chip">${E(DX[x.k].n)}</div>`).join('')}</div>`;
+hy.forEach(x=>{o+=`<div class="it"><b>${E(DX[x.k].n)}</b><div class="su">${E(DX[x.k].w)}</div></div>`;});
+}
+
+// UNIFIED PROTOCOL — deduplicated by first 30 chars of sequence name
+if(hy.length){
+const ord=["Ciné","Angio","T1","T2","ECV","Perfusion","Dobutamine","LGE","EGE","PC"];
+const all=[];const seen=new Set();
+hy.forEach(x=>{const d=DX[x.k];if(!d.pr)return;d.pr.forEach(p=>{
+// Dedup key: normalize and take first significant words
+const dk=N(p.s).replace(/[^a-z0-9 ]/g,'').split(' ').slice(0,4).join(' ');
+if(!seen.has(dk)){seen.add(dk);all.push({...p,from:d.n});}
+});});
+all.sort((a,b)=>{const ia=ord.findIndex(x=>N(a.s).includes(N(x)));const ib=ord.findIndex(x=>N(b.s).includes(N(x)));return(ia<0?99:ia)-(ib<0?99:ib);});
+o+=`<div class="sep"></div><h3>Protocole unifié — ${all.length} séquences</h3><div class="up">`;
+let n=1;all.forEach(p=>{o+=`<div class="us"><div class="un">${n++}</div><div class="ub"><b>${E(p.s)}</b><div class="sd">${E(p.d)}</div><div class="xs" style="margin-top:2px">↳ ${E(p.from)}</div></div></div>`;});
+o+=`</div>`;
+
+// Patterns
+o+=`<div class="sep"></div><h3>Patterns / Key points</h3>`;
+hy.forEach(x=>{const d=DX[x.k];if(!d.pt)return;
+o+=`<div class="it"><b>${E(d.n)}</b><ul style="margin:4px 0 0 14px;padding:0">${d.pt.map(p=>`<li class="sm" style="margin-bottom:3px">${E(p)}</li>`).join('')}</ul></div>`;});
+
+// Traps/errors
+const hasTraps=hy.some(x=>DX[x.k].traps&&DX[x.k].traps.length);
+if(hasTraps){
+o+=`<div class="sep"></div><h3>⚠️ Pièges / erreurs à éviter</h3>`;
+hy.forEach(x=>{const d=DX[x.k];if(!d.traps||!d.traps.length)return;
+o+=`<div class="warn-box" style="margin-bottom:7px"><b>${E(d.n)}</b><ul style="margin:4px 0 0 14px;padding:0">${d.traps.map(p=>`<li style="margin-bottom:3px">${E(p)}</li>`).join('')}</ul></div>`;});
+}
+}
+
+// Gado
+const w=+$('wt').value,e=+$('egfr').value;
+if(w){
+const mmol=.1*w;
+o+=`<div class="sep"></div><h3>Gadolinium</h3><div class="tip-box">0.1 mmol/kg → <b>${mmol.toFixed(1)} mmol</b>. `;
+o+=`Concentration 0.5 mmol/mL : ${(mmol/.5).toFixed(1)} mL. Concentration 1.0 mmol/mL : ${(mmol/1).toFixed(1)} mL. `;
+o+=`Stress fractionné : 2 × 0.05 mmol/kg = 2 × ${(mmol/2).toFixed(1)} mmol.`;
+if(e&&e<30)o+=`<br>⚠️ DFGe < 30 : privilégier macrocyclique, dose minimale diagnostique, accord du néphrologue.`;
+o+=`</div>`;
+}
+
+// ECV hint
+const ht=+$('hct').value;
+if(ht)o+=`<div class="tip-box" style="margin-top:7px">ECV : utiliser Ht fractionnaire = ${(ht/100).toFixed(2)} dans la formule (1 − Ht) × (ΔR1 myo / ΔR1 sang).</div>`;
+
+// Alerts
+const al=[];
+if(tgl.pregnant)al.push('⚠️ Grossesse : revoir indication. GBCA à éviter sauf si indispensable. Pas de CI formelle à l\'IRM.');
+if(tgl.ciED)al.push('⚠️ CIED : vérifier compatibilité MR conditionnelle. Mode IRM. Monitoring EP. Wideband LGE si disponible pour réduire les artefacts.');
+if(tgl.asthma)al.push('⚠️ Asthme : adénosine et dipyridamole = CI ABSOLUE. Regadenoson = CI relative (mieux toléré mais prudence). Dobutamine = alternative.');
+if(tgl.avblock)al.push('⚠️ BAV II-III / dysfonction sinusale : tous les vasodilatateurs CI ABSOLUE sans pacemaker.');
+if(tgl.claustro)al.push('⚠️ Claustrophobie : prémédication anxiolytique (hydroxyzine ou lorazépam). Accompagnement, musique, lunettes VR. Sédation consciente si échec.');
+if(tgl.renal)al.push('⚠️ IR avancée (DFGe < 30) : utiliser agent macrocyclique exclusivement. Dose minimale. Pas de double dose. Le risque de NSF avec les macrocycliques modernes est extrêmement faible.');
+if(tgl.ras)al.push('⚠️ RAo serré connu : CI RELATIVE à tous les agents de stress (vasodilatateurs ET dobutamine). Données récentes (Heidelberg 2023) montrent une sécurité acceptable sous surveillance renforcée, mais à discuter au cas par cas.');
+if(tgl.asthma&&tgl.avblock)al.push('🚨 ASTHME + BAV = TOUS les vasodilatateurs sont CI absolue. Dobutamine = seule option (vérifier ses CI propres : HTA sévère, CMH obstructive, arythmie).');
+
+if(al.length)o+=`<div class="sep"></div><h3>Alertes sécurité</h3>${al.map(a=>`<div class="it sm">${a}</div>`).join('')}`;
+
+// Cross-links
+if(ks.includes('Mass'))o+=`<div class="sep"></div><button class="lk" onclick="goTab('masses')">→ Voir onglet Masses (arbre décisionnel + tableau comparatif)</button>`;
+if(ks.includes('StressCMR')||tgl.stressWanted)o+=`<button class="lk" onclick="goTab('stress')" style="margin-left:8px">→ Voir onglet Stress (doses, CI, antidotes)</button>`;
+
+o+=`<div class="sep"></div><div class="xs">Aide experte de cadrage protocole. La validation finale du protocole, des contre-indications et des doses reste sous la responsabilité du centre et du médecin imageur.</div>`;
+$('resB').innerHTML=o;
+}
+
+function renderTips(){
+let o='';
+TIPS_DATA.forEach(t=>{
+o+=`<div class="acc" onclick="this.classList.toggle('open')"><div class="ah"><span>${t.icon}</span> ${E(t.title)}<span class="aa">▼</span></div><div class="ab2">${t.content}</div></div>`;
+});
+$('tipsB').innerHTML=o;
+}
+
+function renderTbl(){
+$('tblB').innerHTML=TBL.map(t=>`<div style="margin-bottom:14px"><h3>${E(t.t)}</h3><div class="tw"><table><thead><tr>${t.h.map(x=>`<th>${E(x)}</th>`).join('')}</tr></thead><tbody>${t.r.map(r=>`<tr>${r.map(c=>`<td>${E(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div></div>`).join('');
+}
+
+function renderStress(){
+const w=+$('wt').value;
+let o=`<div class="note" style="margin-bottom:10px">Toujours vérifier les CI, le matériel d'urgence, le monitoring ECG/PA/SpO2. Stop caféine 12–24h, dipyridamole 48h, bêtabloquants/nitrates 24h (si dobutamine).</div>`;
+o+=`<div class="g2" style="margin-bottom:10px">`;
+o+=`<div class="it"><b>Regadenoson</b><div class="su">0.4 mg IV bolus unique en 10 sec + flush NaCl. Non adapté au poids.</div></div>`;
+o+=`<div class="it"><b>Adénosine</b><div class="su">${w?`140 µg/kg/min = ${(140*w).toFixed(0)} µg/min (${(140*w/1000).toFixed(2)} mg/min). Palier 210 = ${(210*w).toFixed(0)} µg/min.`:'Entrer le poids pour calculer.'}</div></div>`;
+o+=`</div>`;
+o+=`<div class="tw"><table><thead><tr>${STR.h.map(x=>`<th>${E(x)}</th>`).join('')}</tr></thead><tbody>${STR.r.map(r=>`<tr>${r.map(c=>`<td>${E(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+o+=`<div class="sep"></div><button class="lk" onclick="goTab('tables')">→ Voir tableau complet des CI et préparation patient</button>`;
+$('stressB').innerHTML=o;
+}
+
+function renderMass(){
+// Decision tree
+$('mF').innerHTML=`
+<div class="fd">Masse intracardiaque découverte</div><div class="fn">↓</div>
+<div class="fd">Rehaussement au first-pass / EGE ?</div>
+<div class="fb">
+<div><div class="fn">Non ↓</div><div class="fd ok"><b>THROMBUS</b><br><span class="xs">Long TI noir · paroi akinétique · avasculaire</span></div></div>
+<div><div class="fn">Oui ↓</div><div class="fd">Chute signal en fat-sat ?</div>
+<div class="fb">
+<div><div class="fn">Oui ↓</div><div class="fd ok"><b>LIPOME</b><br><span class="xs">T1 hyper + fat-sat chute = diagnostic</span></div></div>
+<div><div class="fn">Non ↓</div><div class="fd">T2 hyposignal ?</div>
+<div class="fb">
+<div><div class="fn">Oui ↓</div><div class="fd ok"><b>FIBROME</b><br><span class="xs">Pédiatrique · LGE intense · calcifié</span></div></div>
+<div><div class="fn">Non ↓</div><div class="fd">OG + pédiculé fosse ovale ?</div>
+<div class="fb">
+<div><div class="fn">Oui ↓</div><div class="fd ok"><b>MYXOME</b><br><span class="xs">T2 hyper · mobile · embolie</span></div></div>
+<div><div class="fn">Non ↓</div><div class="fd">Volumineux · infiltrant · hétérogène · nécrose ?</div>
+<div class="fb">
+<div><div class="fn">Oui ↓</div><div class="fd bad"><b>MALIN</b><br><span class="xs">Sarcome · lymphome · métastase</span></div></div>
+<div><div class="fn">Non ↓</div><div class="fd ok"><b>BÉNIN AUTRE</b><br><span class="xs">Fibroélastome · rhabdomyome · hémangiome · paragangliome</span></div></div>
+</div></div></div></div></div></div></div></div></div>`;
+
+// Table
+const mh=["Masse","Siège","Signal T1/T2","First-pass","LGE","Mobilité","Clé diagnostique"];
+$('mT').innerHTML=`<div class="tw"><table><thead><tr>${mh.map(x=>`<th>${E(x)}</th>`).join('')}</tr></thead><tbody>${MS.map(m=>`<tr><td>${E(m.n)}</td><td>${E(m.loc)}</td><td>${E(m.sig)}</td><td>${E(m.fp)}</td><td>${E(m.lge)}</td><td>${E(m.mob)}</td><td>${E(m.key)}</td></tr>`).join('')}</tbody></table></div>`;
+
+// Cards
+const cl={'B':'✓ Bénin','M':'✗ Malin','—':'Thrombus'};
+$('mC').innerHTML=MS.map(m=>`<div class="acc" onclick="this.classList.toggle('open')"><div class="ah"><span>${E(m.n)}</span><span class="at">${E(cl[m.c])}</span><span class="aa">▼</span></div><div class="ab2">
+<div class="sm"><b>Siège :</b> ${E(m.loc)}</div>
+<div class="sm"><b>Signal :</b> ${E(m.sig)}</div>
+<div class="sm"><b>First-pass :</b> ${E(m.fp)}</div>
+<div class="sm"><b>LGE :</b> ${E(m.lge)}</div>
+<div class="sm"><b>Mobilité :</b> ${E(m.mob)}</div>
+<div class="sm"><b>Clé :</b> ${E(m.key)}</div>
+</div></div>`).join('');
+}
+
+function renderAtlas(f=''){
+const F=N(f);let o='';
+Object.entries(DX).forEach(([k,d])=>{
+if(F&&!N(d.n+' '+d.w+' '+d.tg.join(' ')).includes(F))return;
+let inner=`<div class="sm" style="margin-bottom:6px">${E(d.w)}</div>`;
+if(d.pr){inner+=`<h4>Protocole séquences</h4>`;d.pr.forEach(p=>{inner+=`<div class="sq"><b>${E(p.s)}</b><div class="sd">${E(p.d)}</div></div>`;});}
+if(d.pt){inner+=`<h4>Patterns / Key points</h4><ul style="margin:0 0 0 14px;padding:0">${d.pt.map(p=>`<li class="sm" style="margin-bottom:3px">${E(p)}</li>`).join('')}</ul>`;}
+if(d.traps&&d.traps.length){inner+=`<h4>⚠️ Pièges</h4><ul style="margin:0 0 0 14px;padding:0;color:var(--dg)">${d.traps.map(p=>`<li class="sm" style="margin-bottom:3px">${E(p)}</li>`).join('')}</ul>`;}
+o+=`<div class="acc" onclick="this.classList.toggle('open')"><div class="ah"><span>${E(d.n)}</span><span class="aa">▼</span></div><div class="ab2">${inner}</div></div>`;
+});
+$('atlB').innerHTML=o||`<div class="sm">Aucun résultat.</div>`;
+}
+
+// ═══ CALCULATORS ═══
+function calc(){
+const cw=+$('cW').value,ch=+$('cH').value;
+$('bsaR').innerHTML=cw&&ch?`<b>${(0.007184*Math.pow(cw,0.425)*Math.pow(ch,0.725)).toFixed(3)} m²</b> <span class="sm">(Du Bois)</span>`:`<span class="sm">Entrer poids et taille.</span>`;
+
+const e1=+$('e1').value,e2=+$('e2').value,e3=+$('e3').value,e4=+$('e4').value,eH=+$('eH').value;
+if(e1&&e2&&e3&&e4&&eH){
+const r1m=1/e2-1/e1,r1b=1/e4-1/e3,ecv=(1-eH/100)*(r1m/r1b)*100;
+let interp='';
+if(ecv<25)interp='Normal bas';else if(ecv<=30)interp='Normal';else if(ecv<=35)interp='Discrètement augmenté';else if(ecv<=40)interp='Augmenté';else interp='Très augmenté (évoquer amylose si > 40%)';
+$('ecvR').innerHTML=`<b>ECV = ${ecv.toFixed(1)}%</b><br><span class="sm">${interp}. Les normes dépendent du champ et de la séquence — vérifier les références locales.</span>`;
+}else $('ecvR').innerHTML=`<span class="sm">Remplir T1 pré/post myocarde + sang + Ht.</span>`;
+
+const qp=+$('qp').value,qs=+$('qs').value;
+if(qp&&qs){const r=qp/qs;let interp=r>1.5?'Shunt SIGNIFICATIF (> 1.5) → indication de fermeture':r>1.0?'Shunt minime':'Normal (≈ 1.0)';
+$('qpR').innerHTML=`<b>Qp/Qs = ${r.toFixed(2)}</b><br><span class="sm">${interp}</span>`;}
+else $('qpR').innerHTML=`<span class="sm">Entrer les débits pulmonaire et aortique (mL par cycle cardiaque).</span>`;
+
+const ff=+$('ff').value,bf=+$('bf').value;
+if(ff&&bf){const rf=bf/ff*100;let interp='';
+if(rf<20)interp='Légère';else if(rf<33)interp='Modérée';else if(rf<48)interp='Significative (> 33%)';else interp='Sévère (> 48%)';
+$('rfR').innerHTML=`<b>RF = ${rf.toFixed(1)}%</b> · RV = ${bf.toFixed(0)} mL<br><span class="sm">${interp}. Les seuils dépendent de la valve — consulter le tableau dédié.</span>`;}
+else $('rfR').innerHTML=`<span class="sm">Entrer forward flow et backward flow en mL.</span>`;
+
+const dw=+$('dW').value;
+if(dw){const doses=[5,10,15,20,30,40].map(d=>({dose:d,ugmin:d*dw,mgh:d*dw/1000*60}));
+$('dobR').innerHTML=`<div class="tw"><table><thead><tr><th>Palier</th><th>µg/kg/min</th><th>µg/min</th><th>mg/h</th><th>Usage</th></tr></thead><tbody>${doses.map(d=>`<tr><td>${d.dose}</td><td>${d.dose}</td><td>${d.ugmin.toFixed(0)}</td><td>${d.mgh.toFixed(1)}</td><td>${d.dose<=15?'Viabilité (réserve contractile)':'Stress inotrope (ischémie wall motion)'}</td></tr>`).join('')}</tbody></table></div><div class="xs" style="margin-top:6px">Paliers de 3 min. Atropine 0,25–2 mg si FC insuffisante. Stop si ischémie, TV, HTA > 240/120, chute PA > 40 mmHg.</div>`;}
+else $('dobR').innerHTML=`<span class="sm">Entrer le poids.</span>`;
+
+const gw=+$('gW').value,ge=+$('gE').value;
+if(gw){const mmol=.1*gw;
+$('gadR').innerHTML=`<b>0.1 mmol/kg → ${mmol.toFixed(1)} mmol</b><br><div class="sm">Concentration 0.5 mmol/mL : <b>${(mmol/.5).toFixed(1)} mL</b> · 1.0 mmol/mL : <b>${(mmol/1).toFixed(1)} mL</b></div><div class="sm">Stress fractionné : 2 × 0.05 mmol/kg = 2 × ${(mmol/2).toFixed(1)} mmol (bolus stress puis bolus repos, dose totale = 0.1 mmol/kg)</div>${ge&&ge<30?'<div class="warn-box" style="margin-top:6px">⚠️ DFGe < 30 : macrocyclique exclusivement, dose minimale diagnostique.</div>':''}`;}
+else $('gadR').innerHTML=`<span class="sm">Entrer le poids.</span>`;
+}
+
+// ═══ INIT ═══
+function initTgl(){
+let h='';TGL.forEach(t=>{h+=`<div class="tg" data-k="${t.k}"><span class="tl">${E(t.l)}</span><div class="sw"></div></div>`;});
+$('tgls').innerHTML=h;
+document.querySelectorAll('.tg').forEach(el=>{
+el.addEventListener('click',()=>{const k=el.dataset.k;tgl[k]=!tgl[k];el.classList.toggle('on',tgl[k]);});
+});
+}
+
+document.querySelectorAll('.tab').forEach(b=>{b.addEventListener('click',()=>goTab(b.dataset.t))});
+$('thB').addEventListener('click',()=>document.body.classList.toggle('dark'));
+$('aBtn').addEventListener('click',renderRes);
+$('cBtn').addEventListener('click',()=>{
+$('ctx').value='';$('wt').value='';$('egfr').value='';$('hct').value='';
+Object.keys(tgl).forEach(k=>tgl[k]=0);
+document.querySelectorAll('.tg').forEach(el=>el.classList.remove('on'));
+renderStress();renderRes();
+});
+['wt','egfr','hct','ctx'].forEach(id=>$(id).addEventListener('input',()=>{renderStress();renderRes();}));
+$('aS').addEventListener('input',e=>renderAtlas(e.target.value));
+['cW','cH','e1','e2','e3','e4','eH','qp','qs','ff','bf','dW','gW','gE'].forEach(id=>$(id).addEventListener('input',calc));
+
+initTgl();renderRes();renderTips();renderTbl();renderStress();renderMass();renderAtlas();calc();
+</script></body></html>
