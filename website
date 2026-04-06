@@ -1,6 +1,6 @@
 <!doctype html><html lang="fr"><head>
 <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no"/>
-<title>CMR Atlas 2030 — V10</title>
+<title>CMR Atlas 2030 — V11</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800&display=swap" rel="stylesheet"/>
 <style>
 :root{--bg:#f5f7fb;--s1:rgba(255,255,255,.88);--s2:rgba(255,255,255,.97);--ink:#0c1425;--i2:#3b4557;--mu:#7b8494;--ln:rgba(15,23,42,.06);--ac:#2563eb;--a2:#0d9488;--ab:rgba(37,99,235,.05);--ok:#059669;--wn:#d97706;--dg:#dc2626;--r:18px;--rs:13px;--sh:0 4px 18px rgba(15,23,42,.05);--f:'DM Sans',system-ui,sans-serif;--e:cubic-bezier(.22,1,.36,1)}
@@ -42,9 +42,22 @@ textarea,input[type=number]{width:100%;border:1.5px solid var(--ln);background:v
 .up .us{display:flex;gap:10px;margin-bottom:9px;align-items:flex-start}.up .un{min-width:26px;height:26px;border-radius:50%;background:var(--ac);color:#fff;font-size:11px;font-weight:800;display:grid;place-items:center;flex-shrink:0;margin-top:1px}.up .ub{flex:1}.up .ub b{font-size:13px;display:block;margin-bottom:3px}.up .ub .sd{font-size:12px;color:var(--i2);line-height:1.6}
 .lk{background:none;border:none;color:var(--ac);font:inherit;font-size:12px;font-weight:700;cursor:pointer;padding:4px 0;text-decoration:underline}
 .copy-btn{background:var(--ac);color:#fff;border:none;font:inherit;font-size:12px;font-weight:700;padding:8px 16px;border-radius:var(--rs);cursor:pointer;transition:.12s;margin-top:8px}.copy-btn:active{transform:scale(.95)}.copy-btn.done{background:var(--ok)}
+.scenarios{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}.sc-btn{border:1.5px solid var(--ln);background:var(--s1);color:var(--i2);font:inherit;font-size:11px;font-weight:600;padding:7px 12px;border-radius:20px;cursor:pointer;transition:.15s var(--e);white-space:nowrap}.sc-btn:hover{border-color:var(--ac);color:var(--ac);background:var(--ab)}.sc-btn:active{transform:scale(.95)}
+.score-bar{height:4px;border-radius:99px;background:var(--ln);margin-top:6px;overflow:hidden}.score-fill{height:100%;border-radius:99px;background:var(--ac);transition:width .4s var(--e)}
+.hypo-card{padding:12px;border:1px solid var(--ln);border-radius:var(--rs);background:var(--s1);margin-bottom:8px;cursor:pointer;transition:.15s var(--e)}.hypo-card:hover{border-color:var(--ac);box-shadow:0 2px 12px rgba(37,99,235,.08)}.hypo-card .rank{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:7px;background:var(--ac);color:#fff;font-size:10px;font-weight:800;margin-right:8px;flex-shrink:0}.hypo-card .rank.r2{background:var(--a2)}.hypo-card .rank.r3{background:var(--mu)}
+.ft{text-align:center;padding:20px 14px 32px;color:var(--mu);font-size:11px;line-height:1.7;border-top:1px solid var(--ln);margin-top:16px}
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:var(--bg);padding:10px 20px;border-radius:12px;font-size:13px;font-weight:600;opacity:0;transition:.25s var(--e);pointer-events:none;z-index:999}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.stat-row{display:flex;gap:10px;margin:10px 0;flex-wrap:wrap}.stat-box{flex:1;min-width:70px;padding:10px;border-radius:var(--rs);background:var(--ab);text-align:center}.stat-box .sv{font-size:20px;font-weight:800;color:var(--ac)}.stat-box .sl{font-size:10px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.03em;margin-top:2px}
+.ref-card{padding:14px;border:1px solid var(--ln);border-radius:var(--rs);background:var(--s1);margin-bottom:8px}.ref-card h4{margin:0 0 4px;font-size:13px;color:var(--ink)}.ref-card .ref-meta{font-size:11px;color:var(--mu);margin-bottom:6px}.ref-card .ref-desc{font-size:12px;color:var(--i2);line-height:1.6}
+.kbd{display:inline-block;padding:2px 6px;border-radius:4px;background:var(--s1);border:1px solid var(--ln);font-size:10px;font-weight:700;color:var(--mu);font-family:monospace}
+.empty-state{text-align:center;padding:32px 16px;color:var(--mu)}.empty-state .ei{font-size:36px;margin-bottom:8px}.empty-state p{font-size:13px;line-height:1.6;max-width:300px;margin:0 auto}
+.pulse{animation:pulse 2s infinite}@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+.slide-in{animation:slideIn .3s var(--e)}@keyframes slideIn{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:none}}
+.tab-badge{display:inline-flex;align-items:center;justify-content:center;min-width:16px;height:16px;border-radius:99px;background:rgba(255,255,255,.25);font-size:9px;font-weight:800;padding:0 4px}
+.progress-ring{display:inline-block;width:40px;height:40px;border-radius:50%;background:conic-gradient(var(--ac) var(--pct,0%),var(--ln) 0);position:relative}.progress-ring::after{content:attr(data-val);position:absolute;inset:4px;background:var(--s2);border-radius:50%;display:grid;place-items:center;font-size:10px;font-weight:800;color:var(--ac)}
 </style></head><body>
 <div class="shell">
-<div class="hd"><div class="brand"><h1>CMR Atlas</h1><span class="vr">V10</span></div><div style="display:flex;gap:4px"><button class="ib" id="thB">◐</button></div></div>
+<div class="hd"><div class="brand"><h1>CMR Atlas</h1><span class="vr">V11</span></div><div style="display:flex;gap:4px"><button class="ib" id="kbBtn" title="Raccourcis clavier">⌨</button><button class="ib" id="thB">◐</button></div></div>
 <div class="tabs">
 <button class="T on" data-t="analyze">🧠 Analyse</button>
 <button class="T" data-t="tips">💡 Tips</button>
@@ -53,14 +66,16 @@ textarea,input[type=number]{width:100%;border:1.5px solid var(--ln);background:v
 <button class="T" data-t="masses">🎯 Masses</button>
 <button class="T" data-t="calc">🧮 Calculs</button>
 <button class="T" data-t="atlas">🫀 Atlas</button>
+<button class="T" data-t="refs">📚 Réf.</button>
 </div>
 <div class="sc" id="sc">
 <section class="P on" id="s-analyze"><div class="C"><div class="CH"><div class="ci">📋</div><h2>Contexte clinique</h2></div>
-<textarea id="ctx" placeholder="Exemples : ESV fréquentes · MINOCA troponine · CMH risque arythmique · RAC serré bilan · Cardiotoxicité doxorubicine · Fallot IP résiduelle · IT sévère pré-TEER · Masse OG mobile · Coarctation · VD dilaté · Péricardite constrictive · Bilan pré-ablation FA · HTAP · Cœur d'athlète zone grise…"></textarea>
+<textarea id="ctx" placeholder="Décrivez le contexte clinique : indication, symptômes, antécédents, résultats pertinents…"></textarea>
+<div class="scenarios" id="scenariosBar"></div>
 <div class="g3" style="margin-top:9px"><div><label>Poids (kg)</label><input id="wt" type="number" inputmode="decimal" placeholder="80"></div><div><label>DFGe (mL/min)</label><input id="egfr" type="number" inputmode="decimal" placeholder="75"></div><div><label>Hématocrite (%)</label><input id="hct" type="number" inputmode="decimal" placeholder="42"></div></div>
 <div class="sep"></div><h3>Sécurité / contexte</h3><div class="tgls" id="tgls"></div>
-<div class="brow"><button class="btn bp" id="aBtn">Analyser</button><button class="btn bg" id="cBtn">Effacer</button></div></div>
-<div class="C"><div class="CH"><div class="ci">📊</div><h2>Résultats</h2></div><div id="resB" class="sm">Entrer un contexte clinique puis appuyer sur Analyser.</div></div></section>
+<div class="brow"><button class="btn bp" id="aBtn">🔍 Analyser <span class="kbd" style="margin-left:6px;color:rgba(255,255,255,.7);background:rgba(255,255,255,.15);border-color:rgba(255,255,255,.2)">↵</span></button><button class="btn bg" id="cBtn">Effacer</button></div></div>
+<div class="C"><div class="CH"><div class="ci">📊</div><h2>Résultats</h2></div><div id="resB"></div></div></section>
 <section class="P" id="s-tips"><div class="C"><div class="CH"><div class="ci">💡</div><h2>Tips pratiques</h2></div><div id="tipsB"></div></div></section>
 <section class="P" id="s-tables"><div class="C"><div class="CH"><div class="ci">📊</div><h2>Tables &amp; critères</h2></div><div id="tblB"></div></div></section>
 <section class="P" id="s-stress"><div class="C"><div class="CH"><div class="ci">💉</div><h2>Stress pharmacologique</h2></div><div id="strB"></div></div></section>
@@ -73,8 +88,15 @@ textarea,input[type=number]{width:100%;border:1.5px solid var(--ln);background:v
 <div class="sep"></div><h3>Dobutamine — paliers</h3><div class="g2"><div><label>Poids (kg)</label><input id="dW" type="number" inputmode="decimal" placeholder="80"></div><div></div></div><div class="cr" id="dR"></div>
 <div class="sep"></div><h3>Gadolinium</h3><div class="g2"><div><label>Poids (kg)</label><input id="gW" type="number" inputmode="decimal" placeholder="80"></div><div><label>DFGe</label><input id="gE" type="number" inputmode="decimal" placeholder="75"></div></div><div class="cr" id="gR"></div>
 </div></section>
-<section class="P" id="s-atlas"><div class="C"><div class="CH"><div class="ci">🫀</div><h2>Atlas diagnostics</h2></div><div class="sb"><span class="si">⌕</span><input id="aS" placeholder="Rechercher…"></div><div id="aB"></div></div></section>
+<section class="P" id="s-atlas"><div class="C"><div class="CH"><div class="ci">🫀</div><h2>Atlas diagnostics</h2></div>
+<div class="stat-row" id="atlasStats"></div>
+<div class="sb"><span class="si">⌕</span><input id="aS" placeholder="Rechercher une pathologie…"></div><div id="aB"></div></div></section>
+<section class="P" id="s-refs"><div class="C"><div class="CH"><div class="ci">📚</div><h2>Références & guidelines</h2></div>
+<div class="sm" style="margin-bottom:12px">Sources principales utilisées dans CMR Atlas. Consulter les publications originales pour les recommandations complètes.</div>
+<div id="refsB"></div></div></section>
+<div class="ft">CMR Atlas 2030 — V11<br>Outil d'aide à la décision pour l'IRM cardiaque<br>30 diagnostics · 13 tables · 7 calculateurs · 10 fiches masses<br><span style="font-size:10px;opacity:.7">Validation finale par le médecin imageur. Ne se substitue pas au jugement clinique.</span></div>
 </div></div>
+<div class="toast" id="toast"></div>
 <script>
 // ═══ V10 — COMPLETE SEMANTIC DATABASE ═══
 // Every French/English cardiology term, abbreviation, synonym mapped to tags
@@ -488,6 +510,38 @@ const STR={h:["Agent","Dose","Timing CMR","CI principales","Antidote"],r:[
 ["Dipyridamole","0,56 mg/kg IV sur 4 min","Pic vasodilatateur 4–8 min puis first-pass","Bronchospasme · BAV · Stop caféine 12–24h","Aminophylline 125–250 mg IV (effets 15–25 min)"],
 ["Dobutamine","Paliers 3 min : 5→10→20→30→40 µg/kg/min · Atropine 0,25–2 mg si FC insuffisante","Ciné wall motion à CHAQUE palier","HTA ≥220/120 · RAo serré · CMH obstruct · TV","Arrêt + esmolol/métoprolol IV"]]};
 
+// ═══ QUICK SCENARIOS ═══
+const SCENARIOS=[
+{l:"MINOCA troponine+",v:"MINOCA troponine élevée coronaires non obstructives"},
+{l:"CMH risque arythmique",v:"CMH hypertrophie asymétrique bilan risque arythmique ESV"},
+{l:"Amylose suspectée",v:"HVG inexpliquée discordance ECG/masse ICFEp amylose"},
+{l:"Masse OG",v:"Masse auriculaire gauche mobile bilan tumeur thrombus"},
+{l:"Myocardite aiguë",v:"Douleur thoracique troponine élevée coronaires normales jeune"},
+{l:"Stress ischémie",v:"Sténose intermédiaire IVA stress perfusion ischémie inductible"},
+{l:"Fallot suivi",v:"Fallot réparée IP résiduelle dilatation VD suivi"},
+{l:"Cœur d'athlète",v:"Sportif endurance HVG 14 mm zone grise différentiel CMH"},
+{l:"Cardiotoxicité",v:"Cardiotoxicité doxorubicine anthracycline FEVG suivi"},
+{l:"Péricardite constrictive",v:"Péricardite constrictive épanchement dyspnée constriction"},
+{l:"Sarcoïdose",v:"BAV inexpliqué sarcoïdose cardiaque suspectée granulome"},
+{l:"RAo pré-TAVI",v:"RAo serré bilan pré-TAVI amylose viabilité"}
+];
+
+// ═══ REFERENCES ═══
+const REFS=[
+{t:"ESC 2023 — Cardiomyopathies",y:"2023",src:"European Heart Journal",d:"Guidelines pour le diagnostic et la prise en charge des cardiomyopathies. HCM Risk-SCD, LGE ≥15% comme modificateur de risque. Classification MOGE(S)."},
+{t:"ESC 2022 — Arythmies ventriculaires & mort subite",y:"2022",src:"European Heart Journal",d:"Indications DAI, rôle du LGE mid-wall dans CMD (même FEVG >35%), bilan étiologique TV/ESV."},
+{t:"ESC 2021 — Insuffisance cardiaque",y:"2021",src:"European Heart Journal",d:"Place de l'IRM cardiaque dans le bilan étiologique IC, diagnostic amylose, fer."},
+{t:"SCMR 2025 — Normes ventriculaires",y:"2025",src:"Kawel-Boehm et al., JOCMR",d:"Méta-analyse des normes volumétriques et fonctionnelles biV/auriculaires en CMR SSFP 1.5T. Valeurs stratifiées par âge, sexe, ethnie."},
+{t:"Lake Louise 2018 — Critères myocardite",y:"2018",src:"Ferreira et al., JACC",d:"Critères diagnostiques actualisés : ≥1 T2-based + ≥1 T1-based = myocardite active. Intégration T1/T2 mapping et ECV."},
+{t:"TFC 2010 — Critères ACM",y:"2010",src:"Marcus et al., European Heart Journal",d:"Task Force Criteria révisés pour le diagnostic de cardiomyopathie arythmogène. Critères CMR majeurs et mineurs (volumes VD, FEVD, anomalies cinétiques)."},
+{t:"MR-INFORM 2019",y:"2019",src:"Nagel et al., NEJM",d:"Essai randomisé multicentrique : stratégie CMR stress non inférieure à FFR invasive pour le diagnostic d'ischémie. Se/Sp ~89/87%."},
+{t:"Myerson 2012 — Seuils IAo CMR",y:"2012",src:"Myerson et al., Heart",d:"RF >33% prédit la progression vers chirurgie avec PPV 85%. Seuils CMR plus bas que seuils échographiques."},
+{t:"Myerson 2016 — Seuils IM CMR",y:"2016",src:"Myerson et al., Circulation",d:"IM primaire : RV >55 mL ou RF >40% = sévère en CMR. Méthode volumétrique = gold standard."},
+{t:"SCMR 2020 — Protocoles standardisés",y:"2020",src:"Kramer et al., JOCMR",d:"Recommandations standardisées pour l'acquisition CMR : séquences, plans de coupe, paramètres, indications."},
+{t:"Gelfand 2006 — Grades IAo CMR",y:"2006",src:"Gelfand et al., AJR",d:"Classification de sévérité IAo par CMR : légère ≤15%, modérée 16–25%, modérée-sévère 26–48%, sévère >48%."},
+{t:"HRS 2014 — Sarcoïdose cardiaque",y:"2014",src:"Birnie et al., Heart Rhythm",d:"Recommandations pour le diagnostic et la prise en charge de la sarcoïdose cardiaque. Rôle du LGE comme substrat arythmogène."}
+];
+
 // ═══ SCORING ═══
 const E=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 const $=id=>document.getElementById(id);
@@ -546,13 +600,16 @@ function goTab(t){document.querySelectorAll('.T').forEach(b=>b.classList.toggle(
 
 function renderRes(){
 const txt=$('ctx').value||'',hy=sc(txt),ks=hy.map(h=>h.k);
+if(!txt.trim()){
+$('resB').innerHTML=`<div class="empty-state"><div class="ei">🫀</div><p>Décrivez le contexte clinique ou sélectionnez un scénario rapide ci-dessus, puis appuyez sur <b>Analyser</b>.</p><div style="margin-top:12px"><span class="kbd">↵ Entrée</span> <span class="xs">pour analyser</span></div></div>`;
+return;}
 let ap={l:'ok',m:'Indication cohérente pour CMR.'};if(!ks.length)ap={l:'wn',m:'Compléter le contexte clinique.'};
-let o=`<div class="badge ${ap.l==='ok'?'bok':'bwn'}">${ap.l==='ok'?'✓ Pertinent':'? Compléter le contexte'}</div><div class="sm" style="margin:6px 0 12px">${E(ap.m)}</div>`;
+const maxS=hy.length?hy[0].s:1;
+let o=`<div class="badge ${ap.l==='ok'?'bok':'bwn'}">${ap.l==='ok'?'✓ '+hy.length+' hypothèse'+(hy.length>1?'s':'')+' identifiée'+(hy.length>1?'s':''):'? Compléter le contexte'}</div><div class="sm" style="margin:6px 0 12px">${E(ap.m)}</div>`;
 
 o+=`<h3>Hypothèses diagnostiques</h3>`;
-if(!hy.length)o+=`<div class="sm">Entrer un contexte clinique plus précis.</div>`;
-else{o+=`<div class="chips" style="margin-bottom:8px">${hy.map(x=>`<div class="chip">${E(DX[x.k].n)}</div>`).join('')}</div>`;
-hy.forEach(x=>{o+=`<div class="it"><b>${E(DX[x.k].n)}</b><div class="su">${E(DX[x.k].w)}</div></div>`;});}
+if(!hy.length)o+=`<div class="empty-state" style="padding:16px"><div class="ei">🔍</div><p>Aucune hypothèse trouvée. Précisez le contexte clinique avec des termes médicaux spécifiques.</p></div>`;
+else{hy.forEach((x,i)=>{const pct=Math.round(x.s/maxS*100);const rc=i===0?'':i<3?' r2':' r3';o+=`<div class="hypo-card slide-in" style="animation-delay:${i*50}ms" onclick="goTab('atlas');$('aS').value='${E(DX[x.k].n)}';renderAtlas('${E(DX[x.k].n)}')"><div style="display:flex;align-items:center"><span class="rank${rc}">${i+1}</span><div style="flex:1"><b style="font-size:13px">${E(DX[x.k].n)}</b><div class="su" style="font-size:11px">${E(DX[x.k].w)}</div><div class="score-bar" style="margin-top:6px"><div class="score-fill" style="width:${pct}%"></div></div></div></div></div>`;});}
 
 // UNIFIED MERGED PROTOCOL
 if(hy.length){
@@ -609,7 +666,8 @@ $('resB').innerHTML=o;
 function copyProtocol(){
 const el=$('resB');const text=el.innerText;navigator.clipboard.writeText(text).then(()=>{
 const btn=el.querySelector('.copy-btn');if(btn){btn.textContent='✓ Copié';btn.classList.add('done');setTimeout(()=>{btn.textContent='📋 Copier le protocole';btn.classList.remove('done');},2000);}
-}).catch(()=>alert('Copie non supportée dans ce navigateur.'));}
+showToast('Protocole copié dans le presse-papiers');
+}).catch(()=>showToast('Copie non supportée dans ce navigateur'));}
 
 function renderTips(){$('tipsB').innerHTML=TIPS.map(t=>`<div class="acc" onclick="this.classList.toggle('open')"><div class="ah"><span>${t.i}</span> ${E(t.t)}<span class="aa">▼</span></div><div class="ab2">${t.c}</div></div>`).join('');}
 
@@ -638,6 +696,14 @@ if(d.traps&&d.traps.length){i+=`<h4>⚠️ Pièges</h4><ul style="margin:0 0 0 1
 o+=`<div class="acc" onclick="this.classList.toggle('open')"><div class="ah"><span>${E(d.n)}</span><span class="aa">▼</span></div><div class="ab2">${i}</div></div>`;});
 $('aB').innerHTML=o||`<div class="sm">Aucun résultat.</div>`;}
 
+function renderScenarios(){$('scenariosBar').innerHTML=SCENARIOS.map(s=>`<button class="sc-btn" onclick="$('ctx').value='${s.v}';renderRes();renderStr()">${s.l}</button>`).join('');}
+
+function renderRefs(){$('refsB').innerHTML=REFS.map(r=>`<div class="ref-card"><h4>${E(r.t)}</h4><div class="ref-meta">${E(r.y)} · ${E(r.src)}</div><div class="ref-desc">${E(r.d)}</div></div>`).join('');}
+
+function renderAtlasStats(){const n=Object.keys(DX).length;$('atlasStats').innerHTML=`<div class="stat-box"><div class="sv">${n}</div><div class="sl">Diagnostics</div></div><div class="stat-box"><div class="sv">${TBL.length}</div><div class="sl">Tables</div></div><div class="stat-box"><div class="sv">${TIPS.length}</div><div class="sl">Tips</div></div><div class="stat-box"><div class="sv">${MS.length}</div><div class="sl">Masses</div></div>`;}
+
+function showToast(msg){const t=$('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2000);}
+
 // ═══ CALCULATORS ═══
 function calc(){
 const cw=+$('cW').value,ch=+$('cH').value;
@@ -660,11 +726,27 @@ $('gR').innerHTML=gw?`<b>0.1 mmol/kg → ${(.1*gw).toFixed(1)} mmol</b><br><span
 // ═══ INIT ═══
 function initTgl(){let h='';TGL.forEach(t=>{h+=`<div class="tg" data-k="${t.k}"><span class="tl">${E(t.l)}</span><div class="sw"></div></div>`;});$('tgls').innerHTML=h;document.querySelectorAll('.tg').forEach(el=>{el.addEventListener('click',()=>{const k=el.dataset.k;tgl[k]=!tgl[k];el.classList.toggle('on',tgl[k]);});});}
 document.querySelectorAll('.T').forEach(b=>b.addEventListener('click',()=>goTab(b.dataset.t)));
-$('thB').addEventListener('click',()=>document.body.classList.toggle('dk'));
+$('thB').addEventListener('click',()=>{document.body.classList.toggle('dk');showToast(document.body.classList.contains('dk')?'Mode sombre activé':'Mode clair activé');});
 $('aBtn').addEventListener('click',renderRes);
-$('cBtn').addEventListener('click',()=>{$('ctx').value='';$('wt').value='';$('egfr').value='';$('hct').value='';Object.keys(tgl).forEach(k=>tgl[k]=0);document.querySelectorAll('.tg').forEach(el=>el.classList.remove('on'));renderStr();renderRes();});
-['wt','egfr','hct','ctx'].forEach(id=>$(id).addEventListener('input',()=>{renderStr();renderRes();}));
+$('cBtn').addEventListener('click',()=>{$('ctx').value='';$('wt').value='';$('egfr').value='';$('hct').value='';Object.keys(tgl).forEach(k=>tgl[k]=0);document.querySelectorAll('.tg').forEach(el=>el.classList.remove('on'));renderStr();renderRes();showToast('Formulaire réinitialisé');});
+// Debounced auto-analysis
+let _dbTimer;function dbRender(){clearTimeout(_dbTimer);_dbTimer=setTimeout(()=>{renderStr();renderRes();},300);}
+['wt','egfr','hct'].forEach(id=>$(id).addEventListener('input',dbRender));
+$('ctx').addEventListener('input',dbRender);
+// Enter key to analyze
+$('ctx').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();renderRes();}});
 $('aS').addEventListener('input',e=>renderAtlas(e.target.value));
 ['cW','cH','e1','e2','e3','e4','eH','qp','qs','ff','bf','dW','gW','gE'].forEach(id=>$(id).addEventListener('input',calc));
-initTgl();renderRes();renderTips();renderTbl();renderStr();renderMass();renderAtlas();calc();
+// Keyboard shortcuts
+$('kbBtn').addEventListener('click',()=>{const kbHTML=`<div class="C" style="position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:1000;max-width:340px;width:90%;box-shadow:0 20px 60px rgba(0,0,0,.3)">
+<div class="CH"><div class="ci">⌨</div><h2>Raccourcis clavier</h2></div>
+<div class="it"><span class="kbd">↵ Entrée</span> — Analyser (dans le champ texte)</div>
+<div class="it"><span class="kbd">Shift + ↵</span> — Nouvelle ligne</div>
+<div class="it"><span class="kbd">1–8</span> — Changer d'onglet (hors champ)</div>
+<div class="brow"><button class="btn bp" onclick="this.closest('.C').remove();$('kbOv').remove()">Fermer</button></div></div>
+<div id="kbOv" style="position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:999" onclick="this.previousElementSibling.remove();this.remove()"></div>`;
+document.body.insertAdjacentHTML('beforeend',kbHTML);});
+// Tab keyboard shortcuts
+document.addEventListener('keydown',e=>{if(e.target.tagName==='TEXTAREA'||e.target.tagName==='INPUT')return;const tabs=['analyze','tips','tables','stress','masses','calc','atlas','refs'];const n=parseInt(e.key);if(n>=1&&n<=8)goTab(tabs[n-1]);});
+initTgl();renderScenarios();renderRes();renderTips();renderTbl();renderStr();renderMass();renderAtlas();renderRefs();renderAtlasStats();calc();
 </script></body></html>
